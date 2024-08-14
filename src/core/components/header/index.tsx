@@ -9,6 +9,7 @@ import {
   Typography,
 } from "antd";
 import React, { useContext } from "react";
+import { Moon, Sun } from "lucide-react";
 import { ColorModeContext } from "../../contexts/color-mode";
 
 const { Text } = Typography;
@@ -46,8 +47,8 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
     <AntdLayout.Header style={headerStyles}>
       <Space>
         <Switch
-          checkedChildren="🌛"
-          unCheckedChildren="🔆"
+          checkedChildren={<Moon width={12} height={12} />}
+          unCheckedChildren={<Sun width={12} height={12} />}
           onChange={() => setMode(mode === "light" ? "dark" : "light")}
           defaultChecked={mode === "dark"}
         />

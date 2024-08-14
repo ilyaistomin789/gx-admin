@@ -1,12 +1,7 @@
-import {
-  DeleteButton,
-  EditButton,
-  List,
-  ShowButton,
-  useTable,
-} from "@refinedev/antd";
+import { List, useTable } from "@refinedev/antd";
 import type { BaseRecord } from "@refinedev/core";
 import { Space, Table } from "antd";
+import { DeleteButton, EditButton, ShowButton } from "../../core";
 
 export const CategoryList = () => {
   const { tableProps } = useTable({
