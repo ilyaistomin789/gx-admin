@@ -11,7 +11,7 @@ import {
 import { Supervisor } from "../../core/types";
 
 const client = axios.create({
-  baseURL: `${AUTH_SERVICE_URL}/supervisor-auth`,
+  baseURL: `${AUTH_SERVICE_URL}`,
   withCredentials: true,
   headers: {
     "Content-type": "application/json",
@@ -24,7 +24,7 @@ export const authProvider: AuthProvider = {
       DefaultResponse<AuthResponse>,
       AxiosResponse<DefaultResponse<AuthResponse>>,
       LoginRequest
-    >("/signup", dto);
+    >("/supervisor-auth/signup", dto);
 
     const { data } = res.data;
 
@@ -55,7 +55,7 @@ export const authProvider: AuthProvider = {
       };
     }
 
-    const res = await client.post<DefaultResponse<AuthResponse>>("/login", {
+    const res = await client.post<DefaultResponse<AuthResponse>>("/supervisor-auth/login", {
       email,
       password,
       verificationCode,
@@ -80,7 +80,7 @@ export const authProvider: AuthProvider = {
   },
 
   logout: async () => {
-    const res = await client.post<DefaultResponse<LogoutResponse>>("/logout");
+    const res = await client.post<DefaultResponse<LogoutResponse>>("/supervisor-auth/logout");
 
     const { data } = res.data;
 
@@ -106,7 +106,7 @@ export const authProvider: AuthProvider = {
         DefaultResponse<Supervisor>,
         AxiosResponse<DefaultResponse<{ isValid: boolean }>>,
         LoginRequest
-      >("/check-token");
+      >("/supervisor-auth/check-token");
 
       const { data } = res.data;
 
@@ -137,7 +137,7 @@ export const authProvider: AuthProvider = {
         DefaultResponse<Supervisor>,
         AxiosResponse<DefaultResponse<Supervisor>>,
         LoginRequest
-      >("/get-identity");
+      >("/supervisor/get-current-supervisor");
       const { data } = res.data;
 
       return {
