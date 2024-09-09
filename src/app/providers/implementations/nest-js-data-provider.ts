@@ -4,13 +4,13 @@ import {
   axiosInstance,
   handleFilter,
   handleJoin,
-  handlePagination,
   handleSort,
   transformHttpError,
 } from "@refinedev/nestjsx-crud";
 import type { AxiosInstance } from "axios";
 import { stringify } from "query-string";
 import { GetManyRequestType } from "../../../core/types";
+import { handlePagination } from "../../../core";
 
 export const customNestJsDataProvider = (
   apiUrl: string,

@@ -48,7 +48,7 @@ export const SizeOptionCreate = () => {
             },
           ]}
         >
-          <Select {...categorySelectProps} />
+          <Select {...categorySelectProps} showSearch={false} />
         </Form.Item>
       </Form>
     </Create>
