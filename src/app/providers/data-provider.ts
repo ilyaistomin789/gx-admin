@@ -1,11 +1,11 @@
 import axios from "axios";
 import { AUTH_SERVICE_URL, STORE_SERVICE_URL } from "../config";
-import nestjsxCrudDataProvider from "@refinedev/nestjsx-crud";
 import { DataProviders } from "@refinedev/core";
+import { customNestJsDataProvider } from "./implementations";
 
 export const dataProviders: DataProviders = {
-  default: nestjsxCrudDataProvider(STORE_SERVICE_URL),
-  auth: nestjsxCrudDataProvider(
+  default: customNestJsDataProvider(STORE_SERVICE_URL),
+  auth: customNestJsDataProvider(
     AUTH_SERVICE_URL,
     axios.create({
       baseURL: AUTH_SERVICE_URL,

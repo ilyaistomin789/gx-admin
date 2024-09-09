@@ -1,1 +1,1 @@
-export * from "./Supervisor";
+export * from "./supervisor";

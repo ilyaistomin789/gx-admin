@@ -1,1 +1,1 @@
-export * from "./RegisterContext";
+export * from "./register-context";

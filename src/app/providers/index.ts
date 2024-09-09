@@ -1,2 +1,2 @@
-export * from "./authProvider";
-export * from "./dataProvider";
+export * from "./auth-provider";
+export * from "./data-provider";

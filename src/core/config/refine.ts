@@ -2,11 +2,11 @@ import { RefineProps } from "@refinedev/core";
 
 export const resources: RefineProps["resources"] = [
   {
-    name: "blog_posts",
-    list: "/blog-posts",
-    create: "/blog-posts/create",
-    edit: "/blog-posts/edit/:id",
-    show: "/blog-posts/show/:id",
+    name: "size-categories",
+    list: "/size-categories",
+    create: "/size-categories/create",
+    edit: "/size-categories/edit/:id",
+    show: "/size-categories/show/:id",
     meta: {
       canDelete: true,
     },

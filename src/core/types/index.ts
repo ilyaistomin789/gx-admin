@@ -1,3 +1,3 @@
-export * from "./KvStorage";
-export * from "./Nullable";
+export * from "./kv-storage";
+export * from "./nullable";
 export * from "./entities";

@@ -1,1 +1,1 @@
-export * from "./AppRefine";
+export * from "./app-refine";

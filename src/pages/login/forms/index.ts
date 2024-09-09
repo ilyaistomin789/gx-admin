@@ -1,2 +1,2 @@
-export * from "./AuthForm";
-export * from "./ControlForm";
+export * from "./auth-form";
+export * from "./control-form";

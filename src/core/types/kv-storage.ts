@@ -1,4 +1,4 @@
-import type { Nullable } from './Nullable';
+import type { Nullable } from './nullable';
 
 export interface KvStorage {
 	set(key: string, value: string): void;

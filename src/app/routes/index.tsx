@@ -6,11 +6,11 @@ import {
 } from "@refinedev/react-router-v6";
 import { Outlet, Route, Routes } from "react-router-dom";
 import {
-  BlogPostCreate,
+  SizeCategoryCreate,
   BlogPostEdit,
   BlogPostList,
   BlogPostShow,
-} from "../../pages/blog-posts";
+} from "../../pages/size-category";
 import {
   CategoryCreate,
   CategoryEdit,
@@ -19,7 +19,7 @@ import {
 } from "../../pages/categories";
 import { Login } from "../../pages/login";
 import { Register } from "../../pages/register";
-import { ForgotPassword } from "../../pages/forgotPassword";
+import { ForgotPassword } from "../../pages/forgot-password";
 import { Header } from "../../core";
 
 export const AppRoutes = () => {
@@ -40,10 +40,13 @@ export const AppRoutes = () => {
           </Authenticated>
         }
       >
-        <Route index element={<NavigateToResource resource="blog_posts" />} />
-        <Route path="/blog-posts">
+        <Route
+          index
+          element={<NavigateToResource resource="size-categories" />}
+        />
+        <Route path="/size-categories">
           <Route index element={<BlogPostList />} />
-          <Route path="create" element={<BlogPostCreate />} />
+          <Route path="create" element={<SizeCategoryCreate />} />
           <Route path="edit/:id" element={<BlogPostEdit />} />
           <Route path="show/:id" element={<BlogPostShow />} />
         </Route>

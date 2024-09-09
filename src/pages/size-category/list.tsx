@@ -8,42 +8,11 @@ export const BlogPostList = () => {
     syncWithLocation: true,
   });
 
-  const { data: categoryData, isLoading: categoryIsLoading } = useMany({
-    resource: "categories",
-    ids:
-      tableProps?.dataSource
-        ?.map((item) => item?.category?.id)
-        .filter(Boolean) ?? [],
-    queryOptions: {
-      enabled: !!tableProps?.dataSource,
-    },
-  });
-
   return (
     <List>
       <Table {...tableProps} rowKey="id">
         <Table.Column dataIndex="id" title={"ID"} />
-        <Table.Column dataIndex="title" title={"Title"} />
-        <Table.Column
-          dataIndex="content"
-          title={"Content"}
-          render={(value: any) => {
-            if (!value) return "-";
-            return <MarkdownField value={value.slice(0, 80) + "..."} />;
-          }}
-        />
-        <Table.Column
-          dataIndex={"category"}
-          title={"Category"}
-          render={(value) =>
-            categoryIsLoading ? (
-              <>Loading...</>
-            ) : (
-              categoryData?.data?.find((item) => item.id === value?.id)?.title
-            )
-          }
-        />
-        <Table.Column dataIndex="status" title={"Status"} />
+        <Table.Column dataIndex="name" title={"Name"} />
         <Table.Column
           dataIndex={["createdAt"]}
           title={"Created at"}
