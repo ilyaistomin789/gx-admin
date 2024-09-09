@@ -1,7 +1,7 @@
-import type { RequestQueryBuilder } from "@nestjsx/crud-request";
 import type { Pagination } from "@refinedev/core";
+import type { RequestQueryBuilder } from "@nestjsx/crud-request";
 
-const handlePagination = (
+export const handlePagination = (
   query: RequestQueryBuilder,
   pagination?: Pagination
 ) => {
@@ -13,5 +13,3 @@ const handlePagination = (
 
   return query;
 };
-
-export { handlePagination };

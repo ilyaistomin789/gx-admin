@@ -1,16 +1,14 @@
-import { CondOperator, RequestQueryBuilder } from "@nestjsx/crud-request";
+import { RequestQueryBuilder } from "@nestjsx/crud-request";
 import type { DataProvider, HttpError } from "@refinedev/core";
 import {
   axiosInstance,
-  handleFilter,
-  handleJoin,
   handleSort,
   transformHttpError,
 } from "@refinedev/nestjsx-crud";
 import type { AxiosInstance } from "axios";
 import { stringify } from "query-string";
 import { GetManyRequestType } from "../../../core/types";
-import { handlePagination } from "../../../core";
+import { handleFilter, handleJoin, handlePagination } from "../../../core";
 
 export const customNestJsDataProvider = (
   apiUrl: string,
