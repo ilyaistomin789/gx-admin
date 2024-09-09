@@ -44,6 +44,7 @@ export const customNestJsDataProvider = (
     if (requestType === GetManyRequestType.GetAll) {
       return {
         data: data.data,
+        total: data.data.length,
       };
     }
 
