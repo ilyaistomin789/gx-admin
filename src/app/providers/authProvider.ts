@@ -90,11 +90,6 @@ export const authProvider: AuthProvider = {
       };
     }
 
-    // return {
-    //   success: true,
-    //   redirectTo: "/login",
-    // };
-
     return {
       success: data.success,
       redirectTo: "/login",
