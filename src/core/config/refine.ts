@@ -12,11 +12,11 @@ export const resources: RefineProps["resources"] = [
     },
   },
   {
-    name: "categories",
-    list: "/categories",
-    create: "/categories/create",
-    edit: "/categories/edit/:id",
-    show: "/categories/show/:id",
+    name: "size-options",
+    list: "/size-options",
+    create: "/size-options/create",
+    edit: "/size-options/edit/:id",
+    show: "/size-options/show/:id",
     meta: {
       canDelete: true,
     },

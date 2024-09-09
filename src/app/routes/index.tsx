@@ -7,16 +7,16 @@ import {
 import { Outlet, Route, Routes } from "react-router-dom";
 import {
   SizeCategoryCreate,
-  BlogPostEdit,
-  BlogPostList,
-  BlogPostShow,
+  SizeCategoryEdit,
+  SizeCategoryList,
+  SizeCategoryShow,
 } from "../../pages/size-category";
 import {
-  CategoryCreate,
-  CategoryEdit,
-  CategoryList,
-  CategoryShow,
-} from "../../pages/categories";
+  SizeOptionCreate,
+  SizeOptionEdit,
+  SizeOptionList,
+  SizeOptionShow,
+} from "../../pages/size-option";
 import { Login } from "../../pages/login";
 import { Register } from "../../pages/register";
 import { ForgotPassword } from "../../pages/forgot-password";
@@ -45,16 +45,16 @@ export const AppRoutes = () => {
           element={<NavigateToResource resource="size-categories" />}
         />
         <Route path="/size-categories">
-          <Route index element={<BlogPostList />} />
+          <Route index element={<SizeCategoryList />} />
           <Route path="create" element={<SizeCategoryCreate />} />
-          <Route path="edit/:id" element={<BlogPostEdit />} />
-          <Route path="show/:id" element={<BlogPostShow />} />
+          <Route path="edit/:id" element={<SizeCategoryEdit />} />
+          <Route path="show/:id" element={<SizeCategoryShow />} />
         </Route>
-        <Route path="/categories">
-          <Route index element={<CategoryList />} />
-          <Route path="create" element={<CategoryCreate />} />
-          <Route path="edit/:id" element={<CategoryEdit />} />
-          <Route path="show/:id" element={<CategoryShow />} />
+        <Route path="/size-options">
+          <Route index element={<SizeOptionList />} />
+          <Route path="create" element={<SizeOptionCreate />} />
+          <Route path="edit/:id" element={<SizeOptionEdit />} />
+          <Route path="show/:id" element={<SizeOptionShow />} />
         </Route>
         <Route path="*" element={<ErrorComponent />} />
       </Route>

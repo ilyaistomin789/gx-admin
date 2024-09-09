@@ -10,13 +10,13 @@ import {
 } from "@refinedev/nestjsx-crud";
 import type { AxiosInstance } from "axios";
 import { stringify } from "query-string";
+import { GetManyRequestType } from "../../../core/types";
 
 export const customNestJsDataProvider = (
   apiUrl: string,
   httpClient: AxiosInstance = axiosInstance
 ): Required<DataProvider> => ({
   getList: async ({ resource, pagination, filters, sorters, meta }) => {
-    const url = `${apiUrl}/${resource}/get-list`;
     RequestQueryBuilder.setOptions({
       paramNamesMap: {
         limit: "pageSize",
@@ -24,6 +24,13 @@ export const customNestJsDataProvider = (
         sort: "orderFieldName",
       },
     });
+
+    const requestType = meta?.requestType ?? GetManyRequestType.GetList;
+
+    const resourcePath =
+      requestType === GetManyRequestType.GetList ? "get-list" : "get-all";
+
+    const url = `${apiUrl}/${resource}/${resourcePath}`;
 
     let query = RequestQueryBuilder.create();
 
@@ -33,6 +40,12 @@ export const customNestJsDataProvider = (
     query = handleSort(query, sorters);
 
     const { data } = await httpClient.get(`${url}?${query.query()}`);
+
+    if (requestType === GetManyRequestType.GetAll) {
+      return {
+        data: data.data,
+      };
+    }
 
     // without pagination
     if (Array.isArray(data)) {
@@ -55,18 +68,10 @@ export const customNestJsDataProvider = (
   getMany: async ({ resource, ids, meta }) => {
     const url = `${apiUrl}/${resource}`;
 
-    let query = RequestQueryBuilder.create().setFilter({
-      field: "id",
-      operator: CondOperator.IN,
-      value: ids,
-    });
-
-    query = handleJoin(query, meta?.join);
-
-    const { data } = await httpClient.get(`${url}?${query.query()}`);
+    const { data } = await httpClient.post(`${url}/get-many`, { ids });
 
     return {
-      data,
+      data: data.data,
     };
   },
 

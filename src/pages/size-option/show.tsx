@@ -4,7 +4,7 @@ import { Typography } from "antd";
 
 const { Title } = Typography;
 
-export const CategoryShow = () => {
+export const SizeOptionShow = () => {
   const { queryResult } = useShow({});
   const { data, isLoading } = queryResult;
 

@@ -3,7 +3,7 @@ import { useMany, type BaseRecord } from "@refinedev/core";
 import { Space, Table } from "antd";
 import { EditButton, ShowButton, DeleteButton } from "../../core";
 
-export const BlogPostList = () => {
+export const SizeCategoryList = () => {
   const { tableProps } = useTable({
     syncWithLocation: true,
   });
