@@ -1,12 +1,55 @@
 import { AuthPage } from "@refinedev/antd";
+import "./styles.css";
+import { Steps } from "antd";
+import { useMemo } from "react";
+import { Link } from "react-router-dom";
+import { useLoginContext, withLoginContext } from "./contexts";
+import { LoginSteps } from "./types";
+import { AuthForm, ControlForm } from "./forms";
 
-export const Login = () => {
+const steps = [{ title: "Аутентификация" }, { title: "Верификация" }];
+
+export const Login = withLoginContext(() => {
+  const { step } = useLoginContext();
+  const stepItems = useMemo(() => {
+    return steps.map((s, index) => {
+      const disabled = index !== step;
+
+      return (
+        <Steps.Step disabled={disabled} key={s.title + index} title={s.title} />
+      );
+    });
+  }, [step]);
+
   return (
-    <AuthPage
-      type="login"
-      formProps={{
-        initialValues: { email: "demo@refine.dev", password: "demodemo" },
-      }}
-    />
+    <div className="background">
+      <div className="login">
+        <p className="login__title">Вход</p>
+        <Steps current={step} size="small">
+          {stepItems}
+        </Steps>
+        {step === LoginSteps.Auth && <AuthForm />}
+        {step === LoginSteps.Control && <ControlForm />}
+        <div
+          style={{
+            marginTop: "10px",
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Link
+            style={{
+              color: "black",
+              textAlign: "center",
+            }}
+            to={"/register"}
+          >
+            Регистрация
+          </Link>
+        </div>
+      </div>
+    </div>
   );
-};
+});

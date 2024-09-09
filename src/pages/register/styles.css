@@ -1,0 +1,31 @@
+.background {
+  background-image: url("auth.jpg");
+  background-size: cover; /* Масштабирует изображение, чтобы оно покрывало весь экран */
+  background-position: center; /* Центрирует изображение */
+  background-repeat: no-repeat; /* Запрещает повторение изображения */
+  background-attachment: fixed; /* Фиксирует фон при прокрутке */
+  height: 100vh; /* Устанавливает высоту контейнера в 100% от высоты экрана */
+  margin: 0;
+  display: flex;
+  align-items: center;
+
+  justify-content: center;
+}
+
+.register {
+  width: 500px;
+  height: min-content;
+  border: 1px solid transparent;
+  border-radius: 24px;
+  background-color: #ffff;
+  padding: 80px 40px;
+}
+
+.register__title {
+  text-align: center;
+  font-size: 32px;
+}
+
+.register__form {
+  margin-top: 32px;
+}
