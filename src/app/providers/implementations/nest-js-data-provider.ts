@@ -1,10 +1,6 @@
 import { RequestQueryBuilder } from "@nestjsx/crud-request";
 import type { DataProvider, HttpError } from "@refinedev/core";
-import {
-  axiosInstance,
-  handleSort,
-  transformHttpError,
-} from "@refinedev/nestjsx-crud";
+import { handleSort, transformHttpError } from "@refinedev/nestjsx-crud";
 import type { AxiosInstance } from "axios";
 import { stringify } from "query-string";
 import { GetManyRequestType } from "../../../core/types";
@@ -12,7 +8,7 @@ import { handleFilter, handleJoin, handlePagination } from "../../../core";
 
 export const customNestJsDataProvider = (
   apiUrl: string,
-  httpClient: AxiosInstance = axiosInstance
+  httpClient: AxiosInstance
 ): Required<DataProvider> => ({
   getList: async ({ resource, pagination, filters, sorters, meta }) => {
     RequestQueryBuilder.setOptions({
