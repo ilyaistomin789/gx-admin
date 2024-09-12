@@ -1,4 +1,4 @@
-import { DayType, WeekDay } from '@gx/interfaces/common';
+import { DayType, WeekDay } from "../../common";
 
 export interface PlacementWorkingTime {
   id: string;

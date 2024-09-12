@@ -1,7 +1,7 @@
 export interface AttributeOption {
   id: string;
   attributeTypeId: string;
-  name: string;
+  optionName: string;
   slug: string;
   createdAt: Date;
   updatedAt: Date;

@@ -63,7 +63,9 @@ export const customNestJsDataProvider = (
   getMany: async ({ resource, ids, meta }) => {
     const url = `${apiUrl}/${resource}`;
 
-    const { data } = await httpClient.post(`${url}/get-many`, { ids });
+    const { data } = await httpClient.post(`${url}/get-many`, {
+      ids: [...new Set(ids)],
+    });
 
     return {
       data: data.data,

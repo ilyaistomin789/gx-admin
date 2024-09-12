@@ -8,7 +8,8 @@ export const handlePagination = (
   const { current = 1, pageSize = 10, mode = "server" } = pagination ?? {};
 
   if (mode === "server") {
-    query.setLimit(pageSize).setOffset((current - 1) * pageSize);
+    const offset = (current - 1) * pageSize;
+    query.setLimit(pageSize).setOffset(offset);
   }
 
   return query;

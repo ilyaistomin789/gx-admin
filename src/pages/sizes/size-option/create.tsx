@@ -1,9 +1,9 @@
-import { Edit, useForm, useSelect } from "@refinedev/antd";
+import { Create, useForm, useSelect } from "@refinedev/antd";
 import { Form, Input, InputNumber, Select } from "antd";
-import { GetManyRequestType, SizeCategory } from "../../core/types";
+import { GetManyRequestType, SizeCategory, SizeOption } from "../../../core/types";
 
-export const SizeOptionEdit = () => {
-  const { formProps, saveButtonProps } = useForm({});
+export const SizeOptionCreate = () => {
+  const { formProps, saveButtonProps } = useForm<SizeOption>({});
 
   const { selectProps: categorySelectProps } = useSelect<SizeCategory>({
     resource: "size-categories",
@@ -14,7 +14,7 @@ export const SizeOptionEdit = () => {
   });
 
   return (
-    <Edit saveButtonProps={saveButtonProps}>
+    <Create saveButtonProps={saveButtonProps}>
       <Form {...formProps} layout="vertical">
         <Form.Item
           label={"Name"}
@@ -48,9 +48,9 @@ export const SizeOptionEdit = () => {
             },
           ]}
         >
-          <Select {...categorySelectProps} />
+          <Select {...categorySelectProps} showSearch={false} />
         </Form.Item>
       </Form>
-    </Edit>
+    </Create>
   );
 };

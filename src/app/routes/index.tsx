@@ -5,22 +5,44 @@ import {
   NavigateToResource,
 } from "@refinedev/react-router-v6";
 import { Outlet, Route, Routes } from "react-router-dom";
+import { Header } from "../../core";
 import {
+  SizeCategoryList,
   SizeCategoryCreate,
   SizeCategoryEdit,
-  SizeCategoryList,
   SizeCategoryShow,
-} from "../../pages/size-category";
-import {
+  SizeOptionList,
   SizeOptionCreate,
   SizeOptionEdit,
-  SizeOptionList,
   SizeOptionShow,
-} from "../../pages/size-option";
-import { Login } from "../../pages/login";
-import { Register } from "../../pages/register";
-import { ForgotPassword } from "../../pages/forgot-password";
-import { Header } from "../../core";
+  AttributeTypeList,
+  AttributeTypeCreate,
+  AttributeTypeEdit,
+  AttributeTypeShow,
+  Login,
+  Register,
+  ForgotPassword,
+  AttributeOptionCreate,
+  AttributeOptionEdit,
+  AttributeOptionList,
+  AttributeOptionShow,
+  ColorCreate,
+  ColorEdit,
+  ColorList,
+  ColorShow,
+  PromoCodeCreate,
+  PromoCodeEdit,
+  PromoCodeList,
+  PromoCodeShow,
+  PlacementCreate,
+  PlacementEdit,
+  PlacementList,
+  PlacementShow,
+  PlacementWorkingTimeCreate,
+  PlacementWorkingTimeEdit,
+  PlacementWorkingTimeList,
+  PlacementWorkingTimeShow,
+} from "../../pages";
 
 export const AppRoutes = () => {
   return (
@@ -55,6 +77,42 @@ export const AppRoutes = () => {
           <Route path="create" element={<SizeOptionCreate />} />
           <Route path="edit/:id" element={<SizeOptionEdit />} />
           <Route path="show/:id" element={<SizeOptionShow />} />
+        </Route>
+        <Route path="/attribute-types">
+          <Route index element={<AttributeTypeList />} />
+          <Route path="create" element={<AttributeTypeCreate />} />
+          <Route path="edit/:id" element={<AttributeTypeEdit />} />
+          <Route path="show/:id" element={<AttributeTypeShow />} />
+        </Route>
+        <Route path="/attribute-options">
+          <Route index element={<AttributeOptionList />} />
+          <Route path="create" element={<AttributeOptionCreate />} />
+          <Route path="edit/:id" element={<AttributeOptionEdit />} />
+          <Route path="show/:id" element={<AttributeOptionShow />} />
+        </Route>
+        <Route path="/colors">
+          <Route index element={<ColorList />} />
+          <Route path="create" element={<ColorCreate />} />
+          <Route path="edit/:id" element={<ColorEdit />} />
+          <Route path="show/:id" element={<ColorShow />} />
+        </Route>
+        <Route path="/promo-codes">
+          <Route index element={<PromoCodeList />} />
+          <Route path="create" element={<PromoCodeCreate />} />
+          <Route path="edit/:id" element={<PromoCodeEdit />} />
+          <Route path="show/:id" element={<PromoCodeShow />} />
+        </Route>
+        <Route path="/placements">
+          <Route index element={<PlacementList />} />
+          <Route path="create" element={<PlacementCreate />} />
+          <Route path="edit/:id" element={<PlacementEdit />} />
+          <Route path="show/:id" element={<PlacementShow />} />
+        </Route>
+        <Route path="/placement-working-times">
+          <Route index element={<PlacementWorkingTimeList />} />
+          <Route path="create" element={<PlacementWorkingTimeCreate />} />
+          <Route path="edit/:id" element={<PlacementWorkingTimeEdit />} />
+          <Route path="show/:id" element={<PlacementWorkingTimeShow />} />
         </Route>
         <Route path="*" element={<ErrorComponent />} />
       </Route>

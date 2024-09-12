@@ -1,20 +1,20 @@
 import { List, useTable } from "@refinedev/antd";
 import { useMany, type BaseRecord } from "@refinedev/core";
 import { Space, Spin, Table } from "antd";
-import { DeleteButton, EditButton, ShowButton } from "../../core";
-import { SizeCategory, SizeOption } from "../../core/types";
+import { DeleteButton, EditButton, ShowButton } from "../../../core";
+import { AttributeOption, AttributeType } from "../../../core/types";
 
-export const SizeOptionList = () => {
-  const { tableProps } = useTable<SizeOption>({
+export const AttributeOptionList = () => {
+  const { tableProps } = useTable<AttributeOption>({
     syncWithLocation: true,
   });
 
-  const { data: categoryData, isLoading: categoryIsLoading } =
-    useMany<SizeCategory>({
-      resource: "size-categories",
+  const { data: attributeTypeData, isLoading: attributeTypeIsLoading } =
+    useMany<AttributeType>({
+      resource: "attribute-types",
       ids:
         tableProps?.dataSource
-          ?.map((item) => item?.sizeCategoryId)
+          ?.map((item) => item?.attributeTypeId)
           .filter(Boolean) ?? [],
       queryOptions: {
         enabled: !!tableProps?.dataSource,
@@ -25,16 +25,15 @@ export const SizeOptionList = () => {
     <List>
       <Table {...tableProps} rowKey="id">
         <Table.Column dataIndex="id" title={"ID"} />
-        <Table.Column dataIndex="name" title={"Name"} />
-        <Table.Column dataIndex="sortOrder" title={"Sort Order"} />
+        <Table.Column dataIndex="optionName" title={"Name"} />
         <Table.Column
-          dataIndex={"sizeCategoryId"}
-          title={"Category"}
+          dataIndex={"attributeTypeId"}
+          title={"Attribute Type"}
           render={(value) =>
-            categoryIsLoading ? (
+            attributeTypeIsLoading ? (
               <Spin size="small" />
             ) : (
-              categoryData?.data?.find((item) => item.id === value)?.name
+              attributeTypeData?.data?.find((item) => item.id === value)?.name
             )
           }
         />

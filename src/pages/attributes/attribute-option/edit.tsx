@@ -1,12 +1,16 @@
-import { Create, useForm, useSelect } from "@refinedev/antd";
+import { Edit, useForm, useSelect } from "@refinedev/antd";
 import { Form, Input, InputNumber, Select } from "antd";
-import { GetManyRequestType, SizeCategory, SizeOption } from "../../core/types";
+import {
+  AttributeType,
+  GetManyRequestType,
+  SizeCategory,
+} from "../../../core/types";
 
-export const SizeOptionCreate = () => {
-  const { formProps, saveButtonProps } = useForm<SizeOption>({});
+export const AttributeOptionEdit = () => {
+  const { formProps, saveButtonProps } = useForm({});
 
-  const { selectProps: categorySelectProps } = useSelect<SizeCategory>({
-    resource: "size-categories",
+  const { selectProps: attributeTypeSelectProps } = useSelect<AttributeType>({
+    resource: "attribute-types",
     optionLabel: "name",
     meta: {
       requestType: GetManyRequestType.GetAll,
@@ -14,11 +18,11 @@ export const SizeOptionCreate = () => {
   });
 
   return (
-    <Create saveButtonProps={saveButtonProps}>
+    <Edit saveButtonProps={saveButtonProps}>
       <Form {...formProps} layout="vertical">
         <Form.Item
           label={"Name"}
-          name={["name"]}
+          name={["optionName"]}
           rules={[
             {
               required: true,
@@ -28,29 +32,28 @@ export const SizeOptionCreate = () => {
           <Input />
         </Form.Item>
         <Form.Item
-          label={"Sort Order"}
-          name="sortOrder"
+          label={"Slug"}
+          name={["slug"]}
           rules={[
             {
               required: true,
-              type: "number",
             },
           ]}
         >
-          <InputNumber />
+          <Input />
         </Form.Item>
         <Form.Item
-          label={"Size Category"}
-          name={"sizeCategoryId"}
+          label={"Attribute Type"}
+          name={"attributeTypeId"}
           rules={[
             {
               required: true,
             },
           ]}
         >
-          <Select {...categorySelectProps} showSearch={false} />
+          <Select {...attributeTypeSelectProps} showSearch={false} />
         </Form.Item>
       </Form>
-    </Create>
+    </Edit>
   );
 };

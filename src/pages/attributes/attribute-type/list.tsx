@@ -1,9 +1,9 @@
-import { DateField, List, MarkdownField, useTable } from "@refinedev/antd";
-import { useMany, type BaseRecord } from "@refinedev/core";
+import { DateField, List, useTable } from "@refinedev/antd";
+import { type BaseRecord } from "@refinedev/core";
 import { Space, Table } from "antd";
-import { EditButton, ShowButton, DeleteButton } from "../../core";
+import { EditButton, ShowButton, DeleteButton } from "../../../core";
 
-export const SizeCategoryList = () => {
+export const AttributeTypeList = () => {
   const { tableProps } = useTable({
     syncWithLocation: true,
   });
