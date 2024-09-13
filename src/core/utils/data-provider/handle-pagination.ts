@@ -1,13 +1,13 @@
-import type { Pagination } from "@refinedev/core";
-import type { RequestQueryBuilder } from "@nestjsx/crud-request";
+import type { RequestQueryBuilder } from '@nestjsx/crud-request';
+import type { Pagination } from '@refinedev/core';
 
 export const handlePagination = (
   query: RequestQueryBuilder,
-  pagination?: Pagination
+  pagination?: Pagination,
 ) => {
-  const { current = 1, pageSize = 10, mode = "server" } = pagination ?? {};
+  const { current = 1, pageSize = 10, mode = 'server' } = pagination ?? {};
 
-  if (mode === "server") {
+  if (mode === 'server') {
     const offset = (current - 1) * pageSize;
     query.setLimit(pageSize).setOffset(offset);
   }

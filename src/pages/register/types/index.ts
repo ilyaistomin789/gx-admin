@@ -1,5 +1,5 @@
 export enum RegisterSteps {
-    Check,
-    RegisterInfo,
-    Control,
-  }
+  Check,
+  RegisterInfo,
+  Control,
+}

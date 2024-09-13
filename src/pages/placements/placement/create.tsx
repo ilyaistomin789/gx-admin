@@ -1,13 +1,25 @@
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { Create, useForm } from "@refinedev/antd";
 import { Button, Form, Input, InputNumber, Space } from "antd";
+import { Placement } from "../../../core";
+import { HttpError } from "@refinedev/core";
 
 export const PlacementCreate = () => {
-  const { formProps, saveButtonProps } = useForm({});
+  const { formProps, saveButtonProps } = useForm<
+    Placement,
+    HttpError,
+    Placement
+  >({});
 
-  const handleFinish = (values: any) => {
-    console.log(values);
+  const handleFinish = (values: Placement) => {
+    const modifiedValues: Placement = {
+      ...values,
+      telegram: values.telegram ? values.telegram : null,
+    };
+
+    formProps.onFinish?.(modifiedValues);
   };
+
   return (
     <Create saveButtonProps={saveButtonProps}>
       <Form {...formProps} layout="vertical" onFinish={handleFinish}>
@@ -58,7 +70,7 @@ export const PlacementCreate = () => {
             },
           ]}
         >
-          {(fields, { add, remove }) => (
+          {(fields, { add, remove }, { errors }) => (
             <>
               {fields.map(({ key, name, ...restField }, index) => (
                 <Space
@@ -91,6 +103,7 @@ export const PlacementCreate = () => {
                 >
                   Add Phone
                 </Button>
+                <Form.ErrorList errors={errors} />
               </Form.Item>
             </>
           )}

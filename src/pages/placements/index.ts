@@ -1,2 +1,2 @@
-export * from './placement'
-export * from './placement-working-time'
+export * from './placement';
+export * from './placement-working-time';

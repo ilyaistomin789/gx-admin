@@ -1,4 +1,4 @@
 export enum GetManyRequestType {
-  GetList = "GetList",
-  GetAll = "GetAll",
+  GetList = 'GetList',
+  GetAll = 'GetAll',
 }

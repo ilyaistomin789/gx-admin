@@ -1,2 +1,2 @@
-export * from "./attribute-option";
-export * from "./attribute-type";
+export * from './attribute-option';
+export * from './attribute-type';

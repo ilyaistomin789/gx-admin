@@ -1,20 +1,20 @@
-import type { AuthProvider } from "@refinedev/core";
-import axios, { AxiosResponse } from "axios";
-import { AUTH_SERVICE_URL } from "../config";
+import type { AuthProvider } from '@refinedev/core';
+import axios, { AxiosResponse } from 'axios';
+import { Supervisor } from '../../core/types';
 import {
   AuthResponse,
   DefaultResponse,
   LoginRequest,
   LogoutResponse,
   SignUpRequest,
-} from "../../data";
-import { Supervisor } from "../../core/types";
+} from '../../data';
+import { AUTH_SERVICE_URL } from '../config';
 
 const client = axios.create({
   baseURL: `${AUTH_SERVICE_URL}`,
   withCredentials: true,
   headers: {
-    "Content-type": "application/json",
+    'Content-type': 'application/json',
   },
 });
 
@@ -24,7 +24,7 @@ export const authProvider: AuthProvider = {
       DefaultResponse<AuthResponse>,
       AxiosResponse<DefaultResponse<AuthResponse>>,
       LoginRequest
-    >("/supervisor-auth/signup", dto);
+    >('/supervisor-auth/signup', dto);
 
     const { data } = res.data;
 
@@ -33,14 +33,14 @@ export const authProvider: AuthProvider = {
         success: false,
         error: {
           message: res.data.error.message as string,
-          name: "AuthenticationError",
+          name: 'AuthenticationError',
         },
       };
     }
 
     return {
       success: true,
-      redirectTo: "/",
+      redirectTo: '/',
     };
   },
 
@@ -49,17 +49,20 @@ export const authProvider: AuthProvider = {
       return {
         success: false,
         error: {
-          name: "LoginError",
-          message: "Invalid email or password",
+          name: 'LoginError',
+          message: 'Invalid email or password',
         },
       };
     }
 
-    const res = await client.post<DefaultResponse<AuthResponse>>("/supervisor-auth/login", {
-      email,
-      password,
-      verificationCode,
-    });
+    const res = await client.post<DefaultResponse<AuthResponse>>(
+      '/supervisor-auth/login',
+      {
+        email,
+        password,
+        verificationCode,
+      },
+    );
 
     const { data } = res.data;
 
@@ -68,19 +71,21 @@ export const authProvider: AuthProvider = {
         success: false,
         error: {
           message: res.data.error.message as string,
-          name: "AuthenticationError",
+          name: 'AuthenticationError',
         },
       };
     }
 
     return {
       success: data.success,
-      redirectTo: "/",
+      redirectTo: '/',
     };
   },
 
   logout: async () => {
-    const res = await client.post<DefaultResponse<LogoutResponse>>("/supervisor-auth/logout");
+    const res = await client.post<DefaultResponse<LogoutResponse>>(
+      '/supervisor-auth/logout',
+    );
 
     const { data } = res.data;
 
@@ -92,10 +97,10 @@ export const authProvider: AuthProvider = {
 
     return {
       success: data.success,
-      redirectTo: "/login",
+      redirectTo: '/login',
       successNotification: {
-        message: "Logout Successful",
-        description: "You have successfully logged out.",
+        message: 'Logout Successful',
+        description: 'You have successfully logged out.',
       },
     };
   },
@@ -106,14 +111,14 @@ export const authProvider: AuthProvider = {
         DefaultResponse<Supervisor>,
         AxiosResponse<DefaultResponse<{ isValid: boolean }>>,
         LoginRequest
-      >("/supervisor-auth/check-token");
+      >('/supervisor-auth/check-token');
 
       const { data } = res.data;
 
       if (!data) {
         return {
           authenticated: false,
-          redirectTo: "/login",
+          redirectTo: '/login',
           logout: true,
         };
       }
@@ -122,7 +127,7 @@ export const authProvider: AuthProvider = {
     } catch (error) {
       return {
         authenticated: false,
-        redirectTo: "/login",
+        redirectTo: '/login',
         logout: true,
         error: error as Error,
       };
@@ -137,13 +142,13 @@ export const authProvider: AuthProvider = {
         DefaultResponse<Supervisor>,
         AxiosResponse<DefaultResponse<Supervisor>>,
         LoginRequest
-      >("/supervisor/get-current-supervisor");
+      >('/supervisor/get-current-supervisor');
       const { data } = res.data;
 
       return {
         id: data.id,
         name: `${data.firstName} ${data.lastName}`,
-        avatar: "https://i.pravatar.cc/300",
+        avatar: 'https://i.pravatar.cc/300',
       };
     } catch {
       return null;
@@ -154,7 +159,7 @@ export const authProvider: AuthProvider = {
     if (error.status === 401 || error.status === 403) {
       return {
         logout: true,
-        redirectTo: "/login",
+        redirectTo: '/login',
         error,
       };
     }

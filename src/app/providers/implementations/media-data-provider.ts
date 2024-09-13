@@ -1,15 +1,20 @@
 import { RequestQueryBuilder } from '@nestjsx/crud-request';
-import type { DataProvider, HttpError } from '@refinedev/core';
+import type { DataProvider } from '@refinedev/core';
+
 import { handleSort, transformHttpError } from '@refinedev/nestjsx-crud';
 import type { AxiosInstance } from 'axios';
-import { stringify } from 'query-string';
-import { handleFilter, handleJoin, handlePagination } from '../../../core';
-import { GetManyRequestType } from '../../../core/types';
+import { stringify } from 'querystring';
+import {
+  GetManyRequestType,
+  handleFilter,
+  handleJoin,
+  handlePagination,
+} from '../../../core';
 
-export const customNestJsDataProvider = (
+export const customMediaDataProvider = (
   apiUrl: string,
   httpClient: AxiosInstance,
-): Required<DataProvider> => ({
+): DataProvider => ({
   getList: async ({ resource, pagination, filters, sorters, meta }) => {
     RequestQueryBuilder.setOptions({
       paramNamesMap: {
@@ -73,7 +78,7 @@ export const customNestJsDataProvider = (
   },
 
   create: async ({ resource, variables }) => {
-    const url = `${apiUrl}/${resource}/create`;
+    const url = `${apiUrl}/${resource}/upload`;
 
     try {
       const { data } = await httpClient.post(url, variables);
@@ -104,34 +109,8 @@ export const customNestJsDataProvider = (
     }
   },
 
-  updateMany: async ({ resource, ids, variables }) => {
-    const errors: HttpError[] = [];
-
-    const response = await Promise.all(
-      ids.map(async (id) => {
-        try {
-          const { data } = await httpClient.patch(
-            `${apiUrl}/${resource}/${id}`,
-            variables,
-          );
-          return data;
-        } catch (error) {
-          const httpError = transformHttpError(error);
-
-          errors.push(httpError);
-        }
-      }),
-    );
-
-    if (errors.length > 0) {
-      throw errors;
-    }
-
-    return { data: response };
-  },
-
   createMany: async ({ resource, variables }) => {
-    const url = `${apiUrl}/${resource}/bulk`;
+    const url = `${apiUrl}/${resource}/upload-many`;
 
     try {
       const { data } = await httpClient.post(url, { bulk: variables });
@@ -171,13 +150,11 @@ export const customNestJsDataProvider = (
   },
 
   deleteMany: async ({ resource, ids }) => {
-    const response = await Promise.all(
-      ids.map(async (id) => {
-        const { data } = await httpClient.delete(`${apiUrl}/${resource}/${id}`);
-        return data;
-      }),
+    const { data } = await httpClient.post(
+      `${apiUrl}/${resource}/delete-many`,
+      ids,
     );
-    return { data: response };
+    return { data: data };
   },
 
   getApiUrl: () => {
