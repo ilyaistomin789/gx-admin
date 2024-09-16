@@ -3,7 +3,7 @@ import type { DataProvider } from '@refinedev/core';
 
 import { handleSort, transformHttpError } from '@refinedev/nestjsx-crud';
 import type { AxiosInstance } from 'axios';
-import { stringify } from 'querystring';
+import { stringify } from 'query-string';
 import {
   GetManyRequestType,
   handleFilter,

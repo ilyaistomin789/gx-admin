@@ -1,39 +1,26 @@
-import { ErrorComponent, ThemedLayoutV2, ThemedSiderV2 } from "@refinedev/antd";
-import { Authenticated } from "@refinedev/core";
+import { ErrorComponent, ThemedLayoutV2, ThemedSiderV2 } from '@refinedev/antd';
+import { Authenticated } from '@refinedev/core';
 import {
   CatchAllNavigate,
   NavigateToResource,
-} from "@refinedev/react-router-v6";
-import { Outlet, Route, Routes } from "react-router-dom";
-import { Header } from "../../core";
+} from '@refinedev/react-router-v6';
+import { Outlet, Route, Routes } from 'react-router-dom';
+import { Header } from '../../core';
 import {
-  SizeCategoryList,
-  SizeCategoryCreate,
-  SizeCategoryEdit,
-  SizeCategoryShow,
-  SizeOptionList,
-  SizeOptionCreate,
-  SizeOptionEdit,
-  SizeOptionShow,
-  AttributeTypeList,
-  AttributeTypeCreate,
-  AttributeTypeEdit,
-  AttributeTypeShow,
-  Login,
-  Register,
-  ForgotPassword,
   AttributeOptionCreate,
   AttributeOptionEdit,
   AttributeOptionList,
   AttributeOptionShow,
+  AttributeTypeCreate,
+  AttributeTypeEdit,
+  AttributeTypeList,
+  AttributeTypeShow,
   ColorCreate,
   ColorEdit,
   ColorList,
   ColorShow,
-  PromoCodeCreate,
-  PromoCodeEdit,
-  PromoCodeList,
-  PromoCodeShow,
+  ForgotPassword,
+  Login,
   PlacementCreate,
   PlacementEdit,
   PlacementList,
@@ -42,7 +29,24 @@ import {
   PlacementWorkingTimeEdit,
   PlacementWorkingTimeList,
   PlacementWorkingTimeShow,
-} from "../../pages";
+  ProductCreate,
+  ProductEdit,
+  ProductList,
+  ProductShow,
+  PromoCodeCreate,
+  PromoCodeEdit,
+  PromoCodeList,
+  PromoCodeShow,
+  Register,
+  SizeCategoryCreate,
+  SizeCategoryEdit,
+  SizeCategoryList,
+  SizeCategoryShow,
+  SizeOptionCreate,
+  SizeOptionEdit,
+  SizeOptionList,
+  SizeOptionShow,
+} from '../../pages';
 
 export const AppRoutes = () => {
   return (
@@ -113,6 +117,12 @@ export const AppRoutes = () => {
           <Route path="create" element={<PlacementWorkingTimeCreate />} />
           <Route path="edit/:id" element={<PlacementWorkingTimeEdit />} />
           <Route path="show/:id" element={<PlacementWorkingTimeShow />} />
+        </Route>
+        <Route path="/products">
+          <Route index element={<ProductList />} />
+          <Route path="create" element={<ProductCreate />} />
+          <Route path="edit/:id" element={<ProductEdit />} />
+          <Route path="show/:id" element={<ProductShow />} />
         </Route>
         <Route path="*" element={<ErrorComponent />} />
       </Route>

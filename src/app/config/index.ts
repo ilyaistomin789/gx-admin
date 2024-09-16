@@ -10,5 +10,5 @@ export const STORE_SERVICE_URL =
 
 export const MEDIA_SERVICE_URL =
   process.env.NODE_ENV !== 'development'
-    ? `${import.meta.env.AUTH_SERVICE_URL}`
+    ? `${import.meta.env.MEDIA_SERVICE_URL}`
     : 'http://localhost:3002/api';
