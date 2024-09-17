@@ -4,7 +4,7 @@ import { Typography } from 'antd';
 
 const { Title } = Typography;
 
-export const ProductShow = () => {
+export const ProductCategoryShow = () => {
   const { queryResult } = useShow({});
   const { data, isLoading } = queryResult;
 

@@ -29,10 +29,18 @@ import {
   PlacementWorkingTimeEdit,
   PlacementWorkingTimeList,
   PlacementWorkingTimeShow,
+  ProductCategoryCreate,
+  ProductCategoryEdit,
+  ProductCategoryList,
+  ProductCategoryShow,
   ProductCreate,
   ProductEdit,
   ProductList,
   ProductShow,
+  ProductVariationCreate,
+  ProductVariationEdit,
+  ProductVariationList,
+  ProductVariationShow,
   PromoCodeCreate,
   PromoCodeEdit,
   PromoCodeList,
@@ -123,6 +131,18 @@ export const AppRoutes = () => {
           <Route path="create" element={<ProductCreate />} />
           <Route path="edit/:id" element={<ProductEdit />} />
           <Route path="show/:id" element={<ProductShow />} />
+        </Route>
+        <Route path="/product-categories">
+          <Route index element={<ProductCategoryList />} />
+          <Route path="create" element={<ProductCategoryCreate />} />
+          <Route path="edit/:id" element={<ProductCategoryEdit />} />
+          <Route path="show/:id" element={<ProductCategoryShow />} />
+        </Route>
+        <Route path="/product-variations">
+          <Route index element={<ProductVariationList />} />
+          <Route path="create" element={<ProductVariationCreate />} />
+          <Route path="edit/:id" element={<ProductVariationEdit />} />
+          <Route path="show/:id" element={<ProductVariationShow />} />
         </Route>
         <Route path="*" element={<ErrorComponent />} />
       </Route>

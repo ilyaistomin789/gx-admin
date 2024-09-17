@@ -1,5 +1,6 @@
 export interface ProductItem {
   id: string;
+  name: string;
   productId: string;
   colorId: string;
   originalPrice: number;

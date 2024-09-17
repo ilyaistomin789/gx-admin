@@ -1,29 +1,26 @@
-import { UploadOutlined } from '@ant-design/icons';
 import { Create, useForm, useSelect } from '@refinedev/antd';
 import { HttpError } from '@refinedev/core';
-import { Button, Form, Input, Select, Switch, Upload } from 'antd';
-import { UploadChangeParam, UploadFile } from 'antd/lib/upload';
-import { MEDIA_SERVICE_URL } from '../../../app/config';
+import { Form, Input, Select, Switch } from 'antd';
 import {
   GetManyRequestType,
-  Image,
-  Product,
   ProductCategory,
+  SizeCategory,
 } from '../../../core';
-import { CreateProductBody } from '../../../data';
 
-type CreateProductForm = Omit<
-  Product,
-  'createdAt' | 'updatedAt' | 'id' | 'imageId'
-> & { upload: UploadChangeParam<UploadFile<Image>> };
-
-export const ProductCreate = () => {
+export const ProductCategoryCreate = () => {
   const { formProps, saveButtonProps } = useForm<
-    Product,
+    ProductCategory,
     HttpError,
-    CreateProductForm
+    ProductCategory
   >({});
 
+  const { selectProps: sizeCategorySelectProps } = useSelect<SizeCategory>({
+    resource: 'size-categories',
+    optionLabel: 'name',
+    meta: {
+      requestType: GetManyRequestType.GetAll,
+    },
+  });
   const { selectProps: productCategorySelectProps } =
     useSelect<ProductCategory>({
       resource: 'product-categories',
@@ -33,16 +30,16 @@ export const ProductCreate = () => {
       },
     });
 
-  const handleFinish = (values: CreateProductForm) => {
-    const { upload, ...fields } = values;
-    const imageId = upload.fileList[0].response!.id!;
-
-    const body: CreateProductBody = {
-      ...fields,
-      imageId,
+  const handleFinish = (values: ProductCategory) => {
+    const modifiedValues: ProductCategory = {
+      ...values,
+      parentCategoryId: values?.parentCategoryId
+        ? values.parentCategoryId
+        : null,
+      description: values?.description ? values.description : null,
     };
 
-    formProps.onFinish?.(body as any);
+    formProps.onFinish?.(modifiedValues);
   };
 
   return (
@@ -60,15 +57,15 @@ export const ProductCreate = () => {
           <Input />
         </Form.Item>
         <Form.Item
-          label={'Product Category'}
-          name={'productCategoryId'}
+          label={'Slug'}
+          name={['slug']}
           rules={[
             {
               required: true,
             },
           ]}
         >
-          <Select {...productCategorySelectProps} showSearch={false} />
+          <Input />
         </Form.Item>
         <Form.Item
           label={'Description'}
@@ -82,32 +79,28 @@ export const ProductCreate = () => {
           <Input.TextArea />
         </Form.Item>
         <Form.Item
-          label={'Care Instructions'}
-          name={['careInstructions']}
+          label={'Size Category'}
+          name={'sizeCategoryId'}
           rules={[
             {
-              required: false,
+              required: true,
             },
           ]}
         >
-          <Input.TextArea />
+          <Select {...sizeCategorySelectProps} showSearch={false} />
         </Form.Item>
         <Form.Item
-          label={'About'}
-          name={['about']}
+          label={'Parent product category'}
+          name={'parentCategoryId'}
           rules={[
             {
               required: false,
             },
           ]}
         >
-          <Input.TextArea />
+          <Select {...productCategorySelectProps} showSearch={false} />
         </Form.Item>
-        <Form.Item name="upload" label="Upload">
-          <Upload name="logo" action={`${MEDIA_SERVICE_URL}/images/upload`}>
-            <Button icon={<UploadOutlined />}>Click to upload</Button>
-          </Upload>
-        </Form.Item>
+
         <Form.Item name="status" label="Status" initialValue={true}>
           <Switch />
         </Form.Item>
