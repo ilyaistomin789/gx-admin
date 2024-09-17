@@ -36,7 +36,7 @@ export const ControlForm = () => {
           },
         ]}
       >
-        <Input size="large" />
+        <Input.OTP/>
       </Form.Item>
       <FormAccessButton
         form={form}
