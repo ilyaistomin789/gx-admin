@@ -1,6 +1,6 @@
 import { AuthPage } from "@refinedev/antd";
 import "./styles.css";
-import { Steps } from "antd";
+import { Steps, Card } from "antd";
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useLoginContext, withLoginContext } from "./contexts";
@@ -23,7 +23,7 @@ export const Login = withLoginContext(() => {
 
   return (
     <div className="background">
-      <div className="login">
+      <Card style={{ width: 500 }}>
         <p className="login__title">Вход</p>
         <Steps current={step} size="small">
           {stepItems}
@@ -49,7 +49,7 @@ export const Login = withLoginContext(() => {
             Регистрация
           </Link>
         </div>
-      </div>
+      </Card>
     </div>
   );
 });
