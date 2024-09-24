@@ -1,6 +1,6 @@
 import { AuthPage } from "@refinedev/antd";
 import "./styles.css";
-import { Steps } from "antd";
+import { Steps, Card, Typography } from "antd";
 import { useMemo } from "react";
 import { useTranslate } from "@refinedev/core";
 import { usePublicRegisterContext, withRegisterContext } from "./contexts";
@@ -13,6 +13,8 @@ const steps = [
   { title: "Ввод данных" },
   { title: "Верификация" },
 ];
+
+const { Text } = Typography;
 
 export const Register = withRegisterContext(() => {
   const translate = useTranslate();
@@ -30,7 +32,7 @@ export const Register = withRegisterContext(() => {
 
   return (
     <div className="background">
-      <div className="register">
+      <Card style={{ width: 500 }}>
         <p className="register__title">
           {translate("pages.register.title", "Регистрация")}
         </p>
@@ -56,10 +58,10 @@ export const Register = withRegisterContext(() => {
             }}
             to={"/login"}
           >
-            Войти
+            <Text>Войти</Text>
           </Link>
         </div>
-      </div>
+      </Card>
     </div>
   );
 });

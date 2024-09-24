@@ -1,6 +1,6 @@
 import { AuthPage } from "@refinedev/antd";
 import "./styles.css";
-import { Steps } from "antd";
+import { Steps, Card, Typography } from "antd";
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useLoginContext, withLoginContext } from "./contexts";
@@ -8,6 +8,8 @@ import { LoginSteps } from "./types";
 import { AuthForm, ControlForm } from "./forms";
 
 const steps = [{ title: "Аутентификация" }, { title: "Верификация" }];
+
+const { Text } = Typography;
 
 export const Login = withLoginContext(() => {
   const { step } = useLoginContext();
@@ -23,7 +25,7 @@ export const Login = withLoginContext(() => {
 
   return (
     <div className="background">
-      <div className="login">
+      <Card style={{ width: 500 }}>
         <p className="login__title">Вход</p>
         <Steps current={step} size="small">
           {stepItems}
@@ -46,10 +48,10 @@ export const Login = withLoginContext(() => {
             }}
             to={"/register"}
           >
-            Регистрация
+            <Text>Регистрация</Text>
           </Link>
         </div>
-      </div>
+      </Card>
     </div>
   );
 });
