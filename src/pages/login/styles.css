@@ -1,10 +1,10 @@
 .background {
-  background-image: url("auth.jpg");
-  background-size: cover; /* Масштабирует изображение, чтобы оно покрывало весь экран */
-  background-position: center; /* Центрирует изображение */
-  background-repeat: no-repeat; /* Запрещает повторение изображения */
-  background-attachment: fixed; /* Фиксирует фон при прокрутке */
-  height: 100vh; /* Устанавливает высоту контейнера в 100% от высоты экрана */
+  background-image: url('auth.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100vh;
   margin: 0;
   display: flex;
   align-items: center;
