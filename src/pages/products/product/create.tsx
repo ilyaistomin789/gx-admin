@@ -1,7 +1,11 @@
-import { UploadOutlined } from '@ant-design/icons';
+import {
+  MinusCircleOutlined,
+  PlusOutlined,
+  UploadOutlined,
+} from '@ant-design/icons';
 import { Create, useForm, useSelect } from '@refinedev/antd';
 import { HttpError } from '@refinedev/core';
-import { Button, Form, Input, Select, Switch, Upload } from 'antd';
+import { Button, Form, Input, Select, Space, Switch, Upload } from 'antd';
 import { UploadChangeParam, UploadFile } from 'antd/lib/upload';
 import { MEDIA_SERVICE_URL } from '../../../app/config';
 import {
@@ -35,13 +39,21 @@ export const ProductCreate = () => {
 
   const handleFinish = (values: CreateProductForm) => {
     const { upload, ...fields } = values;
-    const imageId = upload.fileList[0].response!.data.id!;
+    const fileList = upload.fileList;
+    if (!fileList) return;
+
+    const imageId = fileList[0].response!.data.id!;
 
     console.log(upload);
 
     const body: CreateProductBody = {
       ...fields,
       imageId,
+      careInstructions: values?.careInstructions
+        ? values.careInstructions
+        : null,
+      about: values?.about ? values.about : null,
+      description: values?.description ? values.description : null,
     };
 
     formProps.onFinish?.(body as any);
@@ -105,11 +117,67 @@ export const ProductCreate = () => {
         >
           <Input.TextArea />
         </Form.Item>
-        <Form.Item name="upload" label="Upload">
+        <Form.Item name="upload" label="Upload" required>
           <Upload name="logo" action={`${MEDIA_SERVICE_URL}/images/upload`}>
             <Button icon={<UploadOutlined />}>Click to upload</Button>
           </Upload>
         </Form.Item>
+        <Form.List
+          name="characteristics"
+          rules={[
+            {
+              validator: async (_, characteristics) => {
+                console.log(_, characteristics);
+                if (!characteristics || characteristics.length < 1) {
+                  return Promise.reject(
+                    new Error('At least no characteristic'),
+                  );
+                }
+              },
+            },
+          ]}
+        >
+          {(fields, { add, remove }, { errors }) => (
+            <>
+              {fields.map(({ key, name, ...restField }) => (
+                <Space
+                  key={key}
+                  style={{ display: 'flex', marginBottom: 8 }}
+                  align="baseline"
+                >
+                  <Form.Item
+                    {...restField}
+                    name={[name, 'title']}
+                    validateTrigger={['onChange', 'onBlur']}
+                    rules={[{ required: true, message: 'Missing title' }]}
+                  >
+                    <Input placeholder="Title" />
+                  </Form.Item>
+                  <Form.Item
+                    {...restField}
+                    name={[name, 'value']}
+                    validateTrigger={['onChange', 'onBlur']}
+                    rules={[{ required: true, message: 'Missing value' }]}
+                  >
+                    <Input placeholder="Value" />
+                  </Form.Item>
+                  <MinusCircleOutlined onClick={() => remove(name)} />
+                </Space>
+              ))}
+              <Form.Item>
+                <Button
+                  type="dashed"
+                  onClick={() => add()}
+                  block
+                  icon={<PlusOutlined />}
+                >
+                  Add characteristic
+                </Button>
+                <Form.ErrorList errors={errors} />
+              </Form.Item>
+            </>
+          )}
+        </Form.List>
         <Form.Item name="status" label="Status" initialValue={true}>
           <Switch />
         </Form.Item>
