@@ -5,24 +5,19 @@ import {
 } from '@ant-design/icons';
 import { Create, useForm, useSelect } from '@refinedev/antd';
 import { HttpError } from '@refinedev/core';
-import { Button, Form, Input, Select, Space, Switch, Upload } from 'antd';
-import { UploadChangeParam, UploadFile } from 'antd/lib/upload';
-import { MEDIA_SERVICE_URL } from '../../../app/config';
+import { Button, Form, Input, Select, Space, Switch } from 'antd';
 import {
   GetManyRequestType,
-  Image,
+  ImageUpload,
   Product,
   ProductCategory,
 } from '../../../core';
-import { CreateProductBody, DefaultResponse } from '../../../data';
+import { CreateProductBody } from '../../../data';
 
-type CreateProductForm = Omit<
-  Product,
-  'createdAt' | 'updatedAt' | 'id' | 'imageId'
-> & { upload: UploadChangeParam<UploadFile<DefaultResponse<Image>>> };
+type CreateProductForm = Omit<Product, 'createdAt' | 'updatedAt' | 'id'>;
 
 export const ProductCreate = () => {
-  const { formProps, saveButtonProps } = useForm<
+  const { formProps, saveButtonProps, form } = useForm<
     Product,
     HttpError,
     CreateProductForm
@@ -38,16 +33,9 @@ export const ProductCreate = () => {
     });
 
   const handleFinish = (values: CreateProductForm) => {
-    const { upload, ...fields } = values;
-    const fileList = upload.fileList;
-    if (!fileList) return;
-
-    const imageId = fileList[0].response!.data.id!;
-
-    console.log(upload);
-
+    const imageId = form.getFieldValue('imageId');
     const body: CreateProductBody = {
-      ...fields,
+      ...values,
       imageId,
       careInstructions: values?.careInstructions
         ? values.careInstructions
@@ -56,7 +44,7 @@ export const ProductCreate = () => {
       description: values?.description ? values.description : null,
     };
 
-    formProps.onFinish?.(body as any);
+    formProps.onFinish?.(body);
   };
 
   return (
@@ -117,17 +105,22 @@ export const ProductCreate = () => {
         >
           <Input.TextArea />
         </Form.Item>
-        <Form.Item name="upload" label="Upload" required>
-          <Upload name="logo" action={`${MEDIA_SERVICE_URL}/images/upload`}>
+        <Form.Item label="Upload" required>
+          <ImageUpload
+            maxCount={1}
+            name="imageId"
+            onSuccessUpload={(data) => {
+              form.setFieldValue('imageId', data?.id || '');
+            }}
+          >
             <Button icon={<UploadOutlined />}>Click to upload</Button>
-          </Upload>
+          </ImageUpload>
         </Form.Item>
         <Form.List
           name="characteristics"
           rules={[
             {
               validator: async (_, characteristics) => {
-                console.log(_, characteristics);
                 if (!characteristics || characteristics.length < 1) {
                   return Promise.reject(
                     new Error('At least no characteristic'),

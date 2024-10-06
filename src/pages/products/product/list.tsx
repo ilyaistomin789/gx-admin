@@ -1,30 +1,12 @@
 import { DateField, List, useTable } from '@refinedev/antd';
-import { useMany, type BaseRecord } from '@refinedev/core';
-import { Space, Spin, Switch, Table } from 'antd';
-import {
-  DeleteButton,
-  EditButton,
-  Product,
-  ProductCategory,
-  ShowButton,
-} from '../../../core';
+import { type BaseRecord } from '@refinedev/core';
+import { Space, Switch, Table } from 'antd';
+import { DeleteButton, EditButton, Product, ShowButton } from '../../../core';
 
 export const ProductList = () => {
   const { tableProps } = useTable<Product>({
     syncWithLocation: true,
   });
-
-  const { data: productCategoryData, isLoading: productCategoryIsLoading } =
-    useMany<ProductCategory>({
-      resource: 'product-categories',
-      ids:
-        tableProps?.dataSource
-          ?.map((item) => item?.productCategoryId)
-          .filter(Boolean) ?? [],
-      queryOptions: {
-        enabled: !!tableProps?.dataSource,
-      },
-    });
 
   return (
     <List>
@@ -39,15 +21,8 @@ export const ProductList = () => {
           )}
         />
         <Table.Column
-          dataIndex={'productCategoryId'}
+          dataIndex={['category', 'name']}
           title={'Product Category'}
-          render={(value) =>
-            productCategoryIsLoading ? (
-              <Spin size="small" />
-            ) : (
-              productCategoryData?.data?.find((item) => item.id === value)?.name
-            )
-          }
         />
         <Table.Column
           dataIndex={['createdAt']}

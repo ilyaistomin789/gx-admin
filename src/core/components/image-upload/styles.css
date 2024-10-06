@@ -1,0 +1,9 @@
+.ant-upload-wrapper
+  > .ant-upload-list
+  > .ant-upload-list-item-container
+  > .ant-upload-list-item
+  > .ant-upload-list-item-thumbnail
+  > img {
+  object-fit: cover;
+  object-position: center;
+}
