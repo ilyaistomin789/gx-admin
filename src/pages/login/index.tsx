@@ -1,13 +1,13 @@
-import { AuthPage } from "@refinedev/antd";
-import "./styles.css";
-import { Steps, Card, Typography } from "antd";
-import { useMemo } from "react";
-import { Link } from "react-router-dom";
-import { useLoginContext, withLoginContext } from "./contexts";
-import { LoginSteps } from "./types";
-import { AuthForm, ControlForm } from "./forms";
+import { Card, Steps, Typography } from 'antd';
+import { useMemo } from 'react';
+import { Link } from 'react-router-dom';
+import { ThemeSwitch } from '../../core';
+import { useLoginContext, withLoginContext } from './contexts';
+import { AuthForm, ControlForm } from './forms';
+import './styles.css';
+import { LoginSteps } from './types';
 
-const steps = [{ title: "Аутентификация" }, { title: "Верификация" }];
+const steps = [{ title: 'Аутентификация' }, { title: 'Верификация' }];
 
 const { Text } = Typography;
 
@@ -24,34 +24,47 @@ export const Login = withLoginContext(() => {
   }, [step]);
 
   return (
-    <div className="background">
-      <Card style={{ width: 500 }}>
-        <p className="login__title">Вход</p>
-        <Steps current={step} size="small">
-          {stepItems}
-        </Steps>
-        {step === LoginSteps.Auth && <AuthForm />}
-        {step === LoginSteps.Control && <ControlForm />}
-        <div
-          style={{
-            marginTop: "10px",
-            width: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Link
+    <div className="background-login">
+      <div
+        style={{
+          height: 50,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'end',
+          margin:'0 10px'
+        }}
+      >
+        <ThemeSwitch />
+      </div>
+      <div className="content-login">
+        <Card style={{ width: 500 }}>
+          <p className="login__title">Вход</p>
+          <Steps current={step} size="small">
+            {stepItems}
+          </Steps>
+          {step === LoginSteps.Auth && <AuthForm />}
+          {step === LoginSteps.Control && <ControlForm />}
+          <div
             style={{
-              color: "black",
-              textAlign: "center",
+              marginTop: '10px',
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}
-            to={"/register"}
           >
-            <Text>Регистрация</Text>
-          </Link>
-        </div>
-      </Card>
+            <Link
+              style={{
+                color: 'black',
+                textAlign: 'center',
+              }}
+              to={'/register'}
+            >
+              <Text>Регистрация</Text>
+            </Link>
+          </div>
+        </Card>
+      </div>
     </div>
   );
 });

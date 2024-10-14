@@ -1,17 +1,17 @@
-import { AuthPage } from "@refinedev/antd";
-import "./styles.css";
-import { Steps, Card, Typography } from "antd";
-import { useMemo } from "react";
-import { useTranslate } from "@refinedev/core";
-import { usePublicRegisterContext, withRegisterContext } from "./contexts";
-import { CheckForm, ControlForm, RegisterInfoForm } from "./forms";
-import { RegisterSteps } from "./types";
-import { Link } from "react-router-dom";
+import { useTranslate } from '@refinedev/core';
+import { Card, Steps, Typography } from 'antd';
+import { useMemo } from 'react';
+import { Link } from 'react-router-dom';
+import { ThemeSwitch } from '../../core';
+import { usePublicRegisterContext, withRegisterContext } from './contexts';
+import { CheckForm, ControlForm, RegisterInfoForm } from './forms';
+import './styles.css';
+import { RegisterSteps } from './types';
 
 const steps = [
-  { title: "Проверка" },
-  { title: "Ввод данных" },
-  { title: "Верификация" },
+  { title: 'Проверка' },
+  { title: 'Ввод данных' },
+  { title: 'Верификация' },
 ];
 
 const { Text } = Typography;
@@ -31,37 +31,50 @@ export const Register = withRegisterContext(() => {
   }, [step]);
 
   return (
-    <div className="background">
-      <Card style={{ width: 500 }}>
-        <p className="register__title">
-          {translate("pages.register.title", "Регистрация")}
-        </p>
-        <Steps current={step} size="small">
-          {stepItems}
-        </Steps>
-        {step === RegisterSteps.Check && <CheckForm />}
-        {step === RegisterSteps.RegisterInfo && <RegisterInfoForm />}
-        {step === RegisterSteps.Control && <ControlForm />}
-        <div
-          style={{
-            marginTop: "10px",
-            width: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Link
+    <div className="background-register">
+      <div
+        style={{
+          height: 50,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'end',
+          margin: '0 10px',
+        }}
+      >
+        <ThemeSwitch />
+      </div>
+      <div className="content-register">
+        <Card style={{ width: 500 }}>
+          <p className="register__title">
+            {translate('pages.register.title', 'Регистрация')}
+          </p>
+          <Steps current={step} size="small">
+            {stepItems}
+          </Steps>
+          {step === RegisterSteps.Check && <CheckForm />}
+          {step === RegisterSteps.RegisterInfo && <RegisterInfoForm />}
+          {step === RegisterSteps.Control && <ControlForm />}
+          <div
             style={{
-              color: "black",
-              textAlign: "center",
+              marginTop: '10px',
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}
-            to={"/login"}
           >
-            <Text>Войти</Text>
-          </Link>
-        </div>
-      </Card>
+            <Link
+              style={{
+                color: 'black',
+                textAlign: 'center',
+              }}
+              to={'/login'}
+            >
+              <Text>Войти</Text>
+            </Link>
+          </div>
+        </Card>
+      </div>
     </div>
   );
 });

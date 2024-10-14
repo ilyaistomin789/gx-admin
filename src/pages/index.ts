@@ -1,9 +1,9 @@
 export * from './attributes';
 export * from './color';
 export * from './forgot-password';
-export * from './login';
+export { Login } from './login';
 export * from './placements';
 export * from './products';
 export * from './promo-codes';
-export * from './register';
+export { Register } from './register';
 export * from './sizes';

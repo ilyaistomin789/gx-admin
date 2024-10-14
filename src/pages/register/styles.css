@@ -1,5 +1,5 @@
-.background {
-  background-image: url("auth.jpg");
+.background-register {
+  background-image: url('auth.jpg');
   background-size: cover; /* Масштабирует изображение, чтобы оно покрывало весь экран */
   background-position: center; /* Центрирует изображение */
   background-repeat: no-repeat; /* Запрещает повторение изображения */
@@ -8,8 +8,14 @@
   margin: 0;
   display: flex;
   align-items: center;
-
   justify-content: center;
+}
+
+.content-register {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 .register {
