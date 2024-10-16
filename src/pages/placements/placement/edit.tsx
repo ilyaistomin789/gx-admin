@@ -47,7 +47,6 @@ export const PlacementEdit = () => {
           rules={[
             {
               validator: async (_, phones) => {
-                console.log(_, phones);
                 if (!phones || phones.length < 1) {
                   return Promise.reject(new Error("At least no phone"));
                 }

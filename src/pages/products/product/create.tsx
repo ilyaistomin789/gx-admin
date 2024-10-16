@@ -5,9 +5,11 @@ import {
 } from '@ant-design/icons';
 import { Create, useForm, useSelect } from '@refinedev/antd';
 import { HttpError } from '@refinedev/core';
-import { Button, Form, Input, Select, Space, Switch } from 'antd';
+import { Button, Form, Input, Select, Space, Switch, UploadFile } from 'antd';
+import { UploadChangeParam } from 'antd/es/upload';
 import {
   GetManyRequestType,
+  Image,
   ImageUpload,
   Product,
   ProductCategory,
@@ -36,7 +38,7 @@ export const ProductCreate = () => {
     const imageId = form.getFieldValue('imageId');
     const body: CreateProductBody = {
       ...values,
-      imageId,
+      imageId: imageId || null,
       careInstructions: values?.careInstructions
         ? values.careInstructions
         : null,
@@ -45,6 +47,19 @@ export const ProductCreate = () => {
     };
 
     formProps.onFinish?.(body);
+  };
+
+  const handleChange = (info: UploadChangeParam<UploadFile<Image>>) => {
+    switch (info?.file?.status) {
+      case 'done':
+        form.setFieldValue('imageId', info?.file?.response?.id || '');
+        break;
+      case 'removed':
+        form.setFieldValue('imageId', '');
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -109,6 +124,7 @@ export const ProductCreate = () => {
           <ImageUpload
             maxCount={1}
             name="imageId"
+            onChange={handleChange}
             onSuccessUpload={(data) => {
               form.setFieldValue('imageId', data?.id || '');
             }}

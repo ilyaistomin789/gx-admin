@@ -3,7 +3,7 @@ import {
   PlusOutlined,
   UploadOutlined,
 } from '@ant-design/icons';
-import { Edit, useForm, useSelect } from '@refinedev/antd';
+import { Edit, useSelect } from '@refinedev/antd';
 import { HttpError } from '@refinedev/core';
 import { Button, Form, Input, Select, Space, Switch, UploadFile } from 'antd';
 import { UploadChangeParam } from 'antd/es/upload';
@@ -12,15 +12,15 @@ import {
   GetManyRequestType,
   Image,
   ImageUpload,
-  Nullable,
   Product,
   ProductCategory,
   ProductCharacteristic,
+  useForm,
 } from '../../../core';
 import { EditProductBody, ProductBff } from '../../../data';
 
 type EditProductForm = Omit<Product, 'createdAt' | 'updatedAt' | 'id'> & {
-  characteristics?: ProductCharacteristic[];
+  characteristics?: Pick<ProductCharacteristic, 'title' | 'value'>[];
 };
 
 export const ProductEdit = () => {
@@ -28,7 +28,20 @@ export const ProductEdit = () => {
     ProductBff,
     HttpError,
     EditProductForm
-  >({});
+  >({
+    toEditModelConverter: (data) => {
+      const { category, image, characteristics, ...fields } = data;
+      return {
+        ...fields,
+        imageId: image?.id || null,
+        productCategoryId: category?.id as unknown as string,
+        characteristics: characteristics?.map((c) => ({
+          title: c.title,
+          value: c.value,
+        })),
+      };
+    },
+  });
   const { selectProps: productCategorySelectProps } =
     useSelect<ProductCategory>({
       resource: 'product-categories',
@@ -38,13 +51,9 @@ export const ProductEdit = () => {
       },
     });
 
-  const [fileList, setFileList] = useState<UploadFile<Image>[]>([]);
+  const [fileList, setFileList] = useState<UploadFile<Image>[]>([]); // TODO: realize it
 
-  const imageId = Form.useWatch('imageId', { form, preserve: true });
-
-  const handleChange = (
-    info: Nullable<UploadChangeParam<UploadFile<Image>>>,
-  ) => {
+  const handleChange = (info: UploadChangeParam<UploadFile<Image>>) => {
     switch (info?.file?.status) {
       case 'done':
         form.setFieldValue('imageId', info?.file?.response?.id || '');
@@ -58,6 +67,7 @@ export const ProductEdit = () => {
   };
 
   const handleFinish = (values: EditProductForm) => {
+    const imageId: string = form.getFieldValue('imageId');
     const body: EditProductBody = {
       ...values,
       imageId: imageId || null,
@@ -66,38 +76,38 @@ export const ProductEdit = () => {
         : null,
       about: values?.about ? values.about : null,
       description: values?.description ? values.description : null,
-      characteristics: values.characteristics?.map((c) => ({
-        title: c.title,
-        value: c.value,
-      })),
     };
 
-    formProps.onFinish?.(body as any);
+    formProps.onFinish?.(body);
   };
 
   useEffect(() => {
-    if (query?.status === 'success' && !imageId) {
-      form.setFieldsValue({
-        imageId: query?.data?.data?.id || '',
-        productCategoryId: query.data.data.category.id,
-      });
-
-      if (query?.data?.data?.image) {
-        setFileList([
-          {
-            uid: query?.data?.data?.image?.id,
-            name: `${query?.data?.data?.image?.publicId}${query?.data?.data?.image?.extension}`,
-            status: 'done',
-            url: query?.data?.data?.image?.url,
-          },
-        ]);
-      }
+    if (query?.status === 'success' && query?.data?.data?.image) {
+      const image = query?.data?.data?.image;
+      setFileList([
+        {
+          uid: image?.id,
+          name: `${image?.publicId}${image?.extension}`,
+          status: 'done',
+          url: image?.url,
+        },
+      ]);
     }
-  }, [query, form]);
+  }, []);
 
   useEffect(() => {
-    if (!imageId) setFileList([]);
-  }, [imageId]);
+    if (query?.status === 'success' && query?.data?.data?.image) {
+      const image = query?.data?.data?.image;
+      setFileList([
+        {
+          uid: image?.id,
+          name: `${image?.publicId}${image?.extension}`,
+          status: 'done',
+          url: image?.url,
+        },
+      ]);
+    }
+  }, [query?.status]);
 
   return (
     <Edit saveButtonProps={saveButtonProps} isLoading={formLoading}>
@@ -157,16 +167,14 @@ export const ProductEdit = () => {
         >
           <Input.TextArea />
         </Form.Item>
-        <Form.Item label="Upload" required>
+        <Form.Item label="Upload" required name={'imageId'}>
           <ImageUpload
-            name="imageId"
-            onChange={handleChange}
             fileList={fileList}
-            onSuccessUpload={(data: Nullable<Image>) =>
-              form.setFieldValue('imageId', data?.id)
-            }
-            listType="picture"
+            onChange={handleChange}
             maxCount={1}
+            onSuccessUpload={(data) => {
+              form.setFieldValue('imageId', data?.id || '');
+            }}
           >
             <Button icon={<UploadOutlined />}>Click to upload</Button>
           </ImageUpload>
@@ -226,7 +234,7 @@ export const ProductEdit = () => {
             </>
           )}
         </Form.List>
-        <Form.Item name="status" label="Status">
+        <Form.Item name="status" label="Status" initialValue={true}>
           <Switch />
         </Form.Item>
       </Form>

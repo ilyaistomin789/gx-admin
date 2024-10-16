@@ -72,7 +72,6 @@ export const ImageUpload = ({
   };
 
   const handleRemove = (file: UploadFile<Image>) => {
-    console.log(fileList);
     const id = file.uid.startsWith('rc-upload') ? file.response?.id : file.uid;
     mutate({
       id: id || '',
