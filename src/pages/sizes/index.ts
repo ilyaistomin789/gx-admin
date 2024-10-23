@@ -1,2 +1,2 @@
-export * from './size-category';
-export * from './size-option';
+export * from './size-categories';
+export * from './size-options';

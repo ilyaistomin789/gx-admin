@@ -1,3 +1,3 @@
-export * from './product';
-export * from './product-category';
+export * from './root';
+export * from './product-categories';
 export * from './product-variations';
