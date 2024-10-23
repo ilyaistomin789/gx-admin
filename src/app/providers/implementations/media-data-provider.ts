@@ -9,7 +9,7 @@ import {
   handleFilter,
   handleJoin,
   handlePagination,
-} from '../../../core';
+} from '@core';
 
 export const customMediaDataProvider = (
   apiUrl: string,

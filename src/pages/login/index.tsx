@@ -1,7 +1,7 @@
 import { Card, Steps, Typography } from 'antd';
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { ThemeSwitch } from '../../core';
+import { ThemeSwitch } from '@core';
 import { useLoginContext, withLoginContext } from './contexts';
 import { AuthForm, ControlForm } from './forms';
 import './styles.css';

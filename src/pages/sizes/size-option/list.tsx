@@ -1,8 +1,13 @@
-import { List, useTable } from "@refinedev/antd";
-import { useMany, type BaseRecord } from "@refinedev/core";
-import { Space, Spin, Table } from "antd";
-import { DeleteButton, EditButton, ShowButton } from "../../../core";
-import { SizeCategory, SizeOption } from "../../../core/types";
+import {
+  DeleteButton,
+  EditButton,
+  ShowButton,
+  SizeCategory,
+  SizeOption,
+} from '@core';
+import { List, useTable } from '@refinedev/antd';
+import { useMany, type BaseRecord } from '@refinedev/core';
+import { Space, Spin, Table } from 'antd';
 
 export const SizeOptionList = () => {
   const { tableProps } = useTable<SizeOption>({
@@ -11,7 +16,7 @@ export const SizeOptionList = () => {
 
   const { data: categoryData, isLoading: categoryIsLoading } =
     useMany<SizeCategory>({
-      resource: "size-categories",
+      resource: 'size-categories',
       ids:
         tableProps?.dataSource
           ?.map((item) => item?.sizeCategoryId)
@@ -24,12 +29,12 @@ export const SizeOptionList = () => {
   return (
     <List>
       <Table {...tableProps} rowKey="id">
-        <Table.Column dataIndex="id" title={"ID"} />
-        <Table.Column dataIndex="name" title={"Name"} />
-        <Table.Column dataIndex="sortOrder" title={"Sort Order"} />
+        <Table.Column dataIndex="id" title={'ID'} />
+        <Table.Column dataIndex="name" title={'Name'} />
+        <Table.Column dataIndex="sortOrder" title={'Sort Order'} />
         <Table.Column
-          dataIndex={"sizeCategoryId"}
-          title={"Category"}
+          dataIndex={'sizeCategoryId'}
+          title={'Category'}
           render={(value) =>
             categoryIsLoading ? (
               <Spin size="small" />
@@ -39,7 +44,7 @@ export const SizeOptionList = () => {
           }
         />
         <Table.Column
-          title={"Actions"}
+          title={'Actions'}
           dataIndex="actions"
           render={(_, record: BaseRecord) => (
             <Space>

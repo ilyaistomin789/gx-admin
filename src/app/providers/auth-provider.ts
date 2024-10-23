@@ -1,14 +1,14 @@
 import type { AuthProvider } from '@refinedev/core';
 import axios, { AxiosResponse } from 'axios';
-import { Supervisor } from '../../core/types';
 import {
   AuthResponse,
   DefaultResponse,
   LoginRequest,
   LogoutResponse,
   SignUpRequest,
-} from '../../data';
+} from '@data';
 import { AUTH_SERVICE_URL } from '../config';
+import { Supervisor } from '@core';
 
 const client = axios.create({
   baseURL: `${AUTH_SERVICE_URL}`,

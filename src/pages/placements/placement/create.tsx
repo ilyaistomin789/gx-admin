@@ -1,8 +1,8 @@
-import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
-import { Create, useForm } from "@refinedev/antd";
-import { Button, Form, Input, InputNumber, Space } from "antd";
-import { Placement } from "../../../core";
-import { HttpError } from "@refinedev/core";
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import { Placement } from '@core';
+import { Create, useForm } from '@refinedev/antd';
+import { HttpError } from '@refinedev/core';
+import { Button, Form, Input, InputNumber, Space } from 'antd';
 
 export const PlacementCreate = () => {
   const { formProps, saveButtonProps } = useForm<
@@ -24,8 +24,8 @@ export const PlacementCreate = () => {
     <Create saveButtonProps={saveButtonProps}>
       <Form {...formProps} layout="vertical" onFinish={handleFinish}>
         <Form.Item
-          label={"Name"}
-          name={["name"]}
+          label={'Name'}
+          name={['name']}
           rules={[
             {
               required: true,
@@ -35,20 +35,20 @@ export const PlacementCreate = () => {
           <Input />
         </Form.Item>
         <Form.Item
-          label={"Address Code"}
-          name={["addressCode"]}
+          label={'Address Code'}
+          name={['addressCode']}
           rules={[
             {
               required: true,
-              type: "number",
+              type: 'number',
             },
           ]}
         >
           <InputNumber />
         </Form.Item>
         <Form.Item
-          label={"Telegram"}
-          name={["telegram"]}
+          label={'Telegram'}
+          name={['telegram']}
           rules={[
             {
               required: false,
@@ -63,7 +63,7 @@ export const PlacementCreate = () => {
             {
               validator: async (_, phones) => {
                 if (!phones || phones.length < 1) {
-                  return Promise.reject(new Error("At least no phone"));
+                  return Promise.reject(new Error('At least no phone'));
                 }
               },
             },
@@ -74,17 +74,17 @@ export const PlacementCreate = () => {
               {fields.map(({ key, name, ...restField }, index) => (
                 <Space
                   key={key}
-                  style={{ display: "flex", marginBottom: 8 }}
+                  style={{ display: 'flex', marginBottom: 8 }}
                   align="baseline"
                 >
                   <Form.Item
                     {...restField}
                     name={[name]}
-                    validateTrigger={["onChange", "onBlur"]}
+                    validateTrigger={['onChange', 'onBlur']}
                     rules={[
                       {
                         required: true,
-                        message: "Missing phone",
+                        message: 'Missing phone',
                         whitespace: true,
                       },
                     ]}

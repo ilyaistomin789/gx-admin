@@ -1,7 +1,7 @@
 import { Form, Input } from "antd";
-import { SendVerificationCodeRequest, SignUpRequest } from "../../../data";
+import { SendVerificationCodeRequest, SignUpRequest } from "@data";
 import { useApiUrl, useCustomMutation, useTranslate } from "@refinedev/core";
-import { FormAccessButton } from "../../../core";
+import { FormAccessButton } from "@core";
 import { useRegisterContext } from "../contexts";
 import { RegisterSteps } from "../types";
 

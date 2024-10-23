@@ -1,5 +1,3 @@
-import { Create, useForm, useSelect } from "@refinedev/antd";
-import { Form, Input, Select, TimePicker } from "antd";
 import {
   DayType,
   dayTypeTitles,
@@ -7,15 +5,17 @@ import {
   Placement,
   WeekDay,
   weekDayTitles,
-} from "../../../core";
-import { useMemo } from "react";
-import { BaseOptionType } from "antd/es/cascader";
+} from '@core';
+import { Create, useForm, useSelect } from '@refinedev/antd';
+import { Form, Select, TimePicker } from 'antd';
+import { BaseOptionType } from 'antd/es/cascader';
+import { useMemo } from 'react';
 
 export const PlacementWorkingTimeCreate = () => {
   const { formProps, saveButtonProps, form } = useForm({});
   const { selectProps: placementSelectProps } = useSelect<Placement>({
-    resource: "placements",
-    optionLabel: "name",
+    resource: 'placements',
+    optionLabel: 'name',
     meta: {
       requestType: GetManyRequestType.GetAll,
     },
@@ -26,7 +26,7 @@ export const PlacementWorkingTimeCreate = () => {
       (d): BaseOptionType => ({
         label: weekDayTitles[d],
         value: d,
-      })
+      }),
     );
   }, []);
 
@@ -35,7 +35,7 @@ export const PlacementWorkingTimeCreate = () => {
       (d): BaseOptionType => ({
         label: dayTypeTitles[d],
         value: d,
-      })
+      }),
     );
   }, []);
 
@@ -43,8 +43,8 @@ export const PlacementWorkingTimeCreate = () => {
     <Create saveButtonProps={saveButtonProps}>
       <Form {...formProps} layout="vertical">
         <Form.Item
-          label={"Day"}
-          name={["day"]}
+          label={'Day'}
+          name={['day']}
           rules={[
             {
               required: true,
@@ -54,8 +54,8 @@ export const PlacementWorkingTimeCreate = () => {
           <Select options={dayValues} />
         </Form.Item>
         <Form.Item
-          label={"Day Type"}
-          name={["dayType"]}
+          label={'Day Type'}
+          name={['dayType']}
           rules={[
             {
               required: true,
@@ -66,8 +66,8 @@ export const PlacementWorkingTimeCreate = () => {
         </Form.Item>
 
         <Form.Item
-          label={"Working Time From"}
-          name={["workingTimeFrom"]}
+          label={'Working Time From'}
+          name={['workingTimeFrom']}
           rules={[
             {
               required: true,
@@ -77,8 +77,8 @@ export const PlacementWorkingTimeCreate = () => {
           <TimePicker />
         </Form.Item>
         <Form.Item
-          label={"Working Time Till"}
-          name={["workingTimeTill"]}
+          label={'Working Time Till'}
+          name={['workingTimeTill']}
           rules={[
             {
               required: true,
@@ -88,8 +88,8 @@ export const PlacementWorkingTimeCreate = () => {
           <TimePicker />
         </Form.Item>
         <Form.Item
-          label={"Placement"}
-          name={"placementId"}
+          label={'Placement'}
+          name={'placementId'}
           rules={[
             {
               required: true,

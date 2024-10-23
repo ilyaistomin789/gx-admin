@@ -1,13 +1,13 @@
-import { Create, useForm, useSelect } from "@refinedev/antd";
-import { Form, Input, InputNumber, Select } from "antd";
-import { GetManyRequestType, SizeCategory, SizeOption } from "../../../core/types";
+import { GetManyRequestType, SizeCategory, SizeOption } from '@core';
+import { Create, useForm, useSelect } from '@refinedev/antd';
+import { Form, Input, InputNumber, Select } from 'antd';
 
 export const SizeOptionCreate = () => {
   const { formProps, saveButtonProps } = useForm<SizeOption>({});
 
   const { selectProps: categorySelectProps } = useSelect<SizeCategory>({
-    resource: "size-categories",
-    optionLabel: "name",
+    resource: 'size-categories',
+    optionLabel: 'name',
     meta: {
       requestType: GetManyRequestType.GetAll,
     },
@@ -17,8 +17,8 @@ export const SizeOptionCreate = () => {
     <Create saveButtonProps={saveButtonProps}>
       <Form {...formProps} layout="vertical">
         <Form.Item
-          label={"Name"}
-          name={["name"]}
+          label={'Name'}
+          name={['name']}
           rules={[
             {
               required: true,
@@ -28,20 +28,20 @@ export const SizeOptionCreate = () => {
           <Input />
         </Form.Item>
         <Form.Item
-          label={"Sort Order"}
+          label={'Sort Order'}
           name="sortOrder"
           rules={[
             {
               required: true,
-              type: "number",
+              type: 'number',
             },
           ]}
         >
           <InputNumber />
         </Form.Item>
         <Form.Item
-          label={"Size Category"}
-          name={"sizeCategoryId"}
+          label={'Size Category'}
+          name={'sizeCategoryId'}
           rules={[
             {
               required: true,

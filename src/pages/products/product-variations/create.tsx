@@ -6,7 +6,7 @@ import {
   ProductCategory,
   ProductItem,
   SizeOption,
-} from '../../../core';
+} from '@core';
 
 export const ProductVariationCreate = () => {
   const { formProps, saveButtonProps } = useForm<

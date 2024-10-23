@@ -1,12 +1,12 @@
 import { useApiUrl, useCustomMutation, useTranslate } from "@refinedev/core";
 import { Button, Form, Input } from "antd";
 import { useRegisterContext } from "../contexts";
-import { FormAccessButton } from "../../../core";
+import { FormAccessButton } from "@core";
 import {
   CheckEmailRequest,
   CheckEmailResponse,
   DefaultResponse,
-} from "../../../data";
+} from "@data";
 import { useEffect } from "react";
 import { RegisterSteps } from "../types";
 

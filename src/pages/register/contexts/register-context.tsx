@@ -4,7 +4,7 @@ import React, {
   useContext,
   useState,
 } from "react";
-import { SignUpRequest } from "../../../data";
+import { SignUpRequest } from "@data";
 import { RegisterSteps } from "../types";
 
 export interface PublicRegisterContextType {

@@ -1,7 +1,7 @@
 import { Show, TextField } from "@refinedev/antd";
 import { useOne, useShow } from "@refinedev/core";
 import { Spin, Typography } from "antd";
-import { AttributeOption, AttributeType } from "../../../core";
+import { AttributeOption, AttributeType } from "@core";
 
 const { Title, Text } = Typography;
 

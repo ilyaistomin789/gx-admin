@@ -3,11 +3,6 @@ import {
   PlusOutlined,
   UploadOutlined,
 } from '@ant-design/icons';
-import { Edit, useSelect } from '@refinedev/antd';
-import { HttpError } from '@refinedev/core';
-import { Button, Form, Input, Select, Space, Switch, UploadFile } from 'antd';
-import { UploadChangeParam } from 'antd/es/upload';
-import { useEffect, useState } from 'react';
 import {
   GetManyRequestType,
   Image,
@@ -16,8 +11,13 @@ import {
   ProductCategory,
   ProductCharacteristic,
   useForm,
-} from '../../../core';
-import { EditProductBody, ProductBff } from '../../../data';
+} from '@core';
+import { EditProductBody, ProductBff } from '@data';
+import { Edit, useSelect } from '@refinedev/antd';
+import { HttpError } from '@refinedev/core';
+import { Button, Form, Input, Select, Space, Switch, UploadFile } from 'antd';
+import { UploadChangeParam } from 'antd/es/upload';
+import { useEffect, useState } from 'react';
 
 type EditProductForm = Omit<Product, 'createdAt' | 'updatedAt' | 'id'> & {
   characteristics?: Pick<ProductCharacteristic, 'title' | 'value'>[];

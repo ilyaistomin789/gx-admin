@@ -1,7 +1,7 @@
+import { ProductBff } from '@data';
 import { DateField, Show, TextField } from '@refinedev/antd';
 import { useShow } from '@refinedev/core';
 import { Image, Switch, Typography } from 'antd';
-import { ProductBff } from '../../../data';
 
 const { Title, Text } = Typography;
 

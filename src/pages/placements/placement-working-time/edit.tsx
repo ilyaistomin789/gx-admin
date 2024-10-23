@@ -1,14 +1,3 @@
-import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
-import { Edit, useForm, useSelect } from "@refinedev/antd";
-import {
-  Button,
-  Form,
-  Input,
-  InputNumber,
-  Select,
-  Space,
-  TimePicker,
-} from "antd";
 import {
   dayjs,
   DayType,
@@ -17,15 +6,17 @@ import {
   Placement,
   WeekDay,
   weekDayTitles,
-} from "../../../core";
-import { BaseOptionType } from "antd/es/select";
-import { useMemo } from "react";
+} from '@core';
+import { Edit, useForm, useSelect } from '@refinedev/antd';
+import { Form, Select, TimePicker } from 'antd';
+import { BaseOptionType } from 'antd/es/select';
+import { useMemo } from 'react';
 
 export const PlacementWorkingTimeEdit = () => {
   const { formProps, saveButtonProps, formLoading } = useForm({});
   const { selectProps: placementSelectProps } = useSelect<Placement>({
-    resource: "placements",
-    optionLabel: "name",
+    resource: 'placements',
+    optionLabel: 'name',
     meta: {
       requestType: GetManyRequestType.GetAll,
     },
@@ -35,7 +26,7 @@ export const PlacementWorkingTimeEdit = () => {
       (d): BaseOptionType => ({
         label: weekDayTitles[d],
         value: d,
-      })
+      }),
     );
   }, []);
 
@@ -44,7 +35,7 @@ export const PlacementWorkingTimeEdit = () => {
       (d): BaseOptionType => ({
         label: dayTypeTitles[d],
         value: d,
-      })
+      }),
     );
   }, []);
 
@@ -52,8 +43,8 @@ export const PlacementWorkingTimeEdit = () => {
     <Edit saveButtonProps={saveButtonProps} isLoading={formLoading}>
       <Form {...formProps} layout="vertical">
         <Form.Item
-          label={"Day"}
-          name={["day"]}
+          label={'Day'}
+          name={['day']}
           rules={[
             {
               required: true,
@@ -63,8 +54,8 @@ export const PlacementWorkingTimeEdit = () => {
           <Select options={dayValues} />
         </Form.Item>
         <Form.Item
-          label={"Day Type"}
-          name={["dayType"]}
+          label={'Day Type'}
+          name={['dayType']}
           rules={[
             {
               required: true,
@@ -75,8 +66,8 @@ export const PlacementWorkingTimeEdit = () => {
         </Form.Item>
 
         <Form.Item
-          label={"Working Time From"}
-          name={["workingTimeFrom"]}
+          label={'Working Time From'}
+          name={['workingTimeFrom']}
           rules={[
             {
               required: true,
@@ -89,8 +80,8 @@ export const PlacementWorkingTimeEdit = () => {
           <TimePicker />
         </Form.Item>
         <Form.Item
-          label={"Working Time Till"}
-          name={["workingTimeTill"]}
+          label={'Working Time Till'}
+          name={['workingTimeTill']}
           rules={[
             {
               required: true,
@@ -103,8 +94,8 @@ export const PlacementWorkingTimeEdit = () => {
           <TimePicker />
         </Form.Item>
         <Form.Item
-          label={"Placement"}
-          name={"placementId"}
+          label={'Placement'}
+          name={'placementId'}
           rules={[
             {
               required: true,

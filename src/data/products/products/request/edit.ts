@@ -1,4 +1,4 @@
-import { Nullable, Product, ProductCharacteristic } from '../../../../core';
+import { Nullable, Product, ProductCharacteristic } from '@core';
 
 export type EditProductBody = Omit<
   Product,

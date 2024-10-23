@@ -1,7 +1,7 @@
-import { DateField, MarkdownField, Show, TextField } from "@refinedev/antd";
-import { useOne, useShow } from "@refinedev/core";
-import { Spin, Typography } from "antd";
-import { Placement, PlacementWorkingTime } from "../../../core";
+import { Placement, PlacementWorkingTime } from '@core';
+import { DateField, Show, TextField } from '@refinedev/antd';
+import { useOne, useShow } from '@refinedev/core';
+import { Spin, Typography } from 'antd';
 
 const { Title, Text } = Typography;
 
@@ -13,8 +13,8 @@ export const PlacementWorkingTimeShow = () => {
 
   const { data: placementData, isLoading: placementIsLoading } =
     useOne<Placement>({
-      resource: "placements",
-      id: record?.placementId || "",
+      resource: 'placements',
+      id: record?.placementId || '',
       queryOptions: {
         enabled: !!record,
       },
@@ -22,21 +22,21 @@ export const PlacementWorkingTimeShow = () => {
 
   return (
     <Show isLoading={isLoading}>
-      <Title level={5}>{"ID"}</Title>
+      <Title level={5}>{'ID'}</Title>
       <TextField value={record?.id} />
-      <Title level={5}>{"Day"}</Title>
+      <Title level={5}>{'Day'}</Title>
       <TextField value={record?.day} />
-      <Title level={5}>{"Day Type"}</Title>
+      <Title level={5}>{'Day Type'}</Title>
       <TextField value={record?.dayType} />
-      <Title level={5}>{"Working Time From"}</Title>
+      <Title level={5}>{'Working Time From'}</Title>
       <TextField value={record?.workingTimeFrom} />
-      <Title level={5}>{"Working Time Till"}</Title>
+      <Title level={5}>{'Working Time Till'}</Title>
       <TextField value={record?.workingTimeTill} />
-      <Title level={5}>{"Placement"}</Title>
+      <Title level={5}>{'Placement'}</Title>
       <Text>
         {placementIsLoading ? <Spin size="small" /> : placementData?.data?.name}
       </Text>
-      <Title level={5}>{"CreatedAt"}</Title>
+      <Title level={5}>{'CreatedAt'}</Title>
       <DateField value={record?.createdAt} />
     </Show>
   );

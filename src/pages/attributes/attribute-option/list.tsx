@@ -1,8 +1,13 @@
-import { List, useTable } from "@refinedev/antd";
-import { useMany, type BaseRecord } from "@refinedev/core";
-import { Space, Spin, Table } from "antd";
-import { DeleteButton, EditButton, ShowButton } from "../../../core";
-import { AttributeOption, AttributeType } from "../../../core/types";
+import {
+  AttributeOption,
+  AttributeType,
+  DeleteButton,
+  EditButton,
+  ShowButton,
+} from '@core';
+import { List, useTable } from '@refinedev/antd';
+import { useMany, type BaseRecord } from '@refinedev/core';
+import { Space, Spin, Table } from 'antd';
 
 export const AttributeOptionList = () => {
   const { tableProps } = useTable<AttributeOption>({
@@ -11,7 +16,7 @@ export const AttributeOptionList = () => {
 
   const { data: attributeTypeData, isLoading: attributeTypeIsLoading } =
     useMany<AttributeType>({
-      resource: "attribute-types",
+      resource: 'attribute-types',
       ids:
         tableProps?.dataSource
           ?.map((item) => item?.attributeTypeId)
@@ -24,11 +29,11 @@ export const AttributeOptionList = () => {
   return (
     <List>
       <Table {...tableProps} rowKey="id">
-        <Table.Column dataIndex="id" title={"ID"} />
-        <Table.Column dataIndex="optionName" title={"Name"} />
+        <Table.Column dataIndex="id" title={'ID'} />
+        <Table.Column dataIndex="optionName" title={'Name'} />
         <Table.Column
-          dataIndex={"attributeTypeId"}
-          title={"Attribute Type"}
+          dataIndex={'attributeTypeId'}
+          title={'Attribute Type'}
           render={(value) =>
             attributeTypeIsLoading ? (
               <Spin size="small" />
@@ -38,7 +43,7 @@ export const AttributeOptionList = () => {
           }
         />
         <Table.Column
-          title={"Actions"}
+          title={'Actions'}
           dataIndex="actions"
           render={(_, record: BaseRecord) => (
             <Space>

@@ -3,18 +3,18 @@ import {
   PlusOutlined,
   UploadOutlined,
 } from '@ant-design/icons';
-import { Create, useForm, useSelect } from '@refinedev/antd';
-import { HttpError } from '@refinedev/core';
-import { Button, Form, Input, Select, Space, Switch, UploadFile } from 'antd';
-import { UploadChangeParam } from 'antd/es/upload';
 import {
   GetManyRequestType,
   Image,
   ImageUpload,
   Product,
   ProductCategory,
-} from '../../../core';
-import { CreateProductBody } from '../../../data';
+} from '@core';
+import { CreateProductBody } from '@data';
+import { Create, useForm, useSelect } from '@refinedev/antd';
+import { HttpError } from '@refinedev/core';
+import { Button, Form, Input, Select, Space, Switch, UploadFile } from 'antd';
+import { UploadChangeParam } from 'antd/es/upload';
 
 type CreateProductForm = Omit<Product, 'createdAt' | 'updatedAt' | 'id'>;
 

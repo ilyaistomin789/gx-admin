@@ -1,11 +1,11 @@
+import { LoginRequest } from '@data';
 import React, {
   PropsWithChildren,
   useCallback,
   useContext,
   useState,
-} from "react";
-import { LoginRequest } from "../../../data";
-import { LoginSteps } from "../types";
+} from 'react';
+import { LoginSteps } from '../types';
 
 export interface PublicLoginContextType {
   values: LoginRequest;
@@ -15,15 +15,15 @@ export interface PublicLoginContextType {
 export type LoginContextType = PublicLoginContextType & {
   internal_setValue(
     key: keyof LoginContextType,
-    value: Partial<LoginContextType[typeof key]>
+    value: Partial<LoginContextType[typeof key]>,
   ): void;
 };
 
 const LoginContext = React.createContext<LoginContextType>({
   values: {
-    email: "",
-    password: "",
-    verificationCode: "",
+    email: '',
+    password: '',
+    verificationCode: '',
   },
   step: LoginSteps.Auth,
   internal_setValue: null!,
@@ -42,17 +42,17 @@ export const LoginContextProvider = ({ children }: PropsWithChildren) => {
   const internal_setValue = useCallback(
     (key: keyof LoginContextType, value: LoginContextType[typeof key]) => {
       switch (key) {
-        case "values":
+        case 'values':
           setValues((prev) => ({ ...prev, ...(value as LoginRequest) }));
           break;
-        case "step":
+        case 'step':
           setStep(value as LoginSteps);
           break;
         default:
           break;
       }
     },
-    [setStep]
+    [setStep],
   );
 
   return (

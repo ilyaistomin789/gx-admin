@@ -1,7 +1,7 @@
 import { useRegister, useTranslate } from "@refinedev/core";
 import { Form, Input } from "antd";
-import { SignUpRequest } from "../../../data";
-import { FormAccessButton } from "../../../core";
+import { SignUpRequest } from "@data";
+import { FormAccessButton } from "@core";
 import { usePublicRegisterContext } from "../contexts";
 
 export const ControlForm = () => {

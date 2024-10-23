@@ -1,7 +1,7 @@
+import { DeleteButton, EditButton, Product, ShowButton } from '@core';
 import { DateField, List, useTable } from '@refinedev/antd';
 import { type BaseRecord } from '@refinedev/core';
 import { Space, Switch, Table } from 'antd';
-import { DeleteButton, EditButton, Product, ShowButton } from '../../../core';
 
 export const ProductList = () => {
   const { tableProps } = useTable<Product>({

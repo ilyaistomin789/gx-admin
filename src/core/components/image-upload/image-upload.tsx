@@ -4,8 +4,8 @@ import { UploadChangeParam } from 'antd/es/upload';
 import { UploadFile } from 'antd/lib';
 import axios from 'axios';
 import { PropsWithChildren, useEffect, useState } from 'react';
-import { MEDIA_SERVICE_URL } from '../../../app/config';
-import { DefaultResponse } from '../../../data';
+import { MEDIA_SERVICE_URL } from '@app/config';
+import { DefaultResponse } from '@data';
 import { Image, Nullable } from '../../types';
 import './styles.css';
 

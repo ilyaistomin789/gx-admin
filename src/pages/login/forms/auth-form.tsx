@@ -1,21 +1,21 @@
+import { FormAccessButton } from '@core';
+import {
+  DefaultResponse,
+  LoginRequest,
+  SendVerificationCodeRequest,
+} from '@data';
 import {
   CreateResponse,
   useApiUrl,
   useCustomMutation,
   useTranslate,
-} from "@refinedev/core";
-import { Form, Input } from "antd";
-import {
-  DefaultResponse,
-  LoginRequest,
-  SendVerificationCodeRequest,
-} from "../../../data";
-import { useLoginContext } from "../contexts";
-import { FormAccessButton } from "../../../core";
-import { LoginSteps } from "../types";
+} from '@refinedev/core';
+import { Form, Input } from 'antd';
+import { useLoginContext } from '../contexts';
+import { LoginSteps } from '../types';
 
 export const AuthForm = () => {
-  const apiUrl = useApiUrl("auth");
+  const apiUrl = useApiUrl('auth');
   const translate = useTranslate();
   const { internal_setValue } = useLoginContext();
   const { mutateAsync, isLoading } = useCustomMutation();
@@ -27,45 +27,45 @@ export const AuthForm = () => {
     const check: CreateResponse<DefaultResponse<{ isExisted: boolean }>> =
       await mutateAsync({
         url: `${apiUrl}/supervisor-auth/check`,
-        method: "post",
+        method: 'post',
         values: {
           email,
           password,
-        } as Omit<LoginRequest, "verificationCode">,
+        } as Omit<LoginRequest, 'verificationCode'>,
       });
 
     if (check.data.data.isExisted) {
       await mutateAsync({
         url: `${apiUrl}/supervisor-auth/send-verification-code`,
-        method: "post",
+        method: 'post',
         values: {
           email,
         } as SendVerificationCodeRequest,
       });
     }
 
-    internal_setValue("values", { email, password });
-    internal_setValue("step", LoginSteps.Control);
+    internal_setValue('values', { email, password });
+    internal_setValue('step', LoginSteps.Control);
   };
 
   return (
     <Form<LoginRequest> className="login__form" layout="vertical" form={form}>
       <Form.Item
-        label={translate("pages.login.fields.email", "Электронная почта")}
+        label={translate('pages.login.fields.email', 'Электронная почта')}
         name="email"
         rules={[
           {
             required: true,
             message: translate(
-              "pages.login.errors.requiredEmail",
-              "Обязательное поле"
+              'pages.login.errors.requiredEmail',
+              'Обязательное поле',
             ),
           },
           {
-            type: "email",
+            type: 'email',
             message: translate(
-              "pages.login.errors.validEmail",
-              "Неверный формат"
+              'pages.login.errors.validEmail',
+              'Неверный формат',
             ),
           },
         ]}
@@ -74,20 +74,20 @@ export const AuthForm = () => {
       </Form.Item>
       <Form.Item
         name="password"
-        label={translate("pages.login.fields.password", "Пароль")}
+        label={translate('pages.login.fields.password', 'Пароль')}
         rules={[
           {
             required: true,
             message: translate(
-              "pages.login.errors.requiredPassword",
-              "Обязательное поле"
+              'pages.login.errors.requiredPassword',
+              'Обязательное поле',
             ),
           },
           {
             min: 8,
             message: translate(
-              "pages.login.errors.passwordMinLength",
-              "Минимальная длина пароля 8 символов"
+              'pages.login.errors.passwordMinLength',
+              'Минимальная длина пароля 8 символов',
             ),
           },
         ]}
@@ -107,7 +107,7 @@ export const AuthForm = () => {
         loading={isLoading}
         block
       >
-        {translate("pages.login.confirm", "Подтвердить")}
+        {translate('pages.login.confirm', 'Подтвердить')}
       </FormAccessButton>
     </Form>
   );

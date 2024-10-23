@@ -4,7 +4,7 @@ import {
   Product,
   ProductCategory,
   ProductCharacteristic,
-} from '../../../../core';
+} from '@core';
 
 export type ProductBff = Omit<Product, 'imageId' | 'productCategoryId'> & {
   characteristics: ProductCharacteristic[];

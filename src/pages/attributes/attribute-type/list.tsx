@@ -1,7 +1,7 @@
-import { DateField, List, useTable } from "@refinedev/antd";
-import { type BaseRecord } from "@refinedev/core";
-import { Space, Table } from "antd";
-import { EditButton, ShowButton, DeleteButton } from "../../../core";
+import { DeleteButton, EditButton, ShowButton } from '@core';
+import { DateField, List, useTable } from '@refinedev/antd';
+import { type BaseRecord } from '@refinedev/core';
+import { Space, Table } from 'antd';
 
 export const AttributeTypeList = () => {
   const { tableProps } = useTable({
@@ -11,15 +11,15 @@ export const AttributeTypeList = () => {
   return (
     <List>
       <Table {...tableProps} rowKey="id">
-        <Table.Column dataIndex="id" title={"ID"} />
-        <Table.Column dataIndex="name" title={"Name"} />
+        <Table.Column dataIndex="id" title={'ID'} />
+        <Table.Column dataIndex="name" title={'Name'} />
         <Table.Column
-          dataIndex={["createdAt"]}
-          title={"Created at"}
+          dataIndex={['createdAt']}
+          title={'Created at'}
           render={(value: any) => <DateField value={value} />}
         />
         <Table.Column
-          title={"Actions"}
+          title={'Actions'}
           dataIndex="actions"
           render={(_, record: BaseRecord) => (
             <Space>

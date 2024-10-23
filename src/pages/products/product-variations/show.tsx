@@ -1,7 +1,7 @@
 import { DateField, Show, TextField } from '@refinedev/antd';
 import { useOne, useShow } from '@refinedev/core';
 import { Spin, Switch, Typography } from 'antd';
-import { ProductItem, ProductVariation, SizeOption } from '../../../core';
+import { ProductItem, ProductVariation, SizeOption } from '@core';
 
 const { Title, Text } = Typography;
 

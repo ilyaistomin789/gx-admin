@@ -8,7 +8,7 @@ import {
   ProductVariation,
   ShowButton,
   SizeCategory,
-} from '../../../core';
+} from '@core';
 
 export const ProductVariationList = () => {
   const { tableProps } = useTable<ProductVariation>({

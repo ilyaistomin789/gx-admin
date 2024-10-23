@@ -1,11 +1,7 @@
+import { GetManyRequestType, ProductCategory, SizeCategory } from '@core';
 import { Create, useForm, useSelect } from '@refinedev/antd';
 import { HttpError } from '@refinedev/core';
 import { Form, Input, Select, Switch } from 'antd';
-import {
-  GetManyRequestType,
-  ProductCategory,
-  SizeCategory,
-} from '../../../core';
 
 export const ProductCategoryCreate = () => {
   const { formProps, saveButtonProps } = useForm<

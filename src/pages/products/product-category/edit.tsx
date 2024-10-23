@@ -5,7 +5,7 @@ import {
   GetManyRequestType,
   ProductCategory,
   SizeCategory,
-} from '../../../core';
+} from '@core';
 
 export const ProductCategoryEdit = () => {
   const { formProps, saveButtonProps, formLoading } = useForm<

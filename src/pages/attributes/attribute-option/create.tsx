@@ -1,17 +1,13 @@
-import { Create, useForm, useSelect } from "@refinedev/antd";
-import { Form, Input, Select } from "antd";
-import {
-  AttributeOption,
-  AttributeType,
-  GetManyRequestType,
-} from "../../../core/types";
+import { AttributeOption, AttributeType, GetManyRequestType } from '@core';
+import { Create, useForm, useSelect } from '@refinedev/antd';
+import { Form, Input, Select } from 'antd';
 
 export const AttributeOptionCreate = () => {
   const { formProps, saveButtonProps } = useForm<AttributeOption>({});
 
   const { selectProps: attributeTypeSelectProps } = useSelect<AttributeType>({
-    resource: "attribute-types",
-    optionLabel: "name",
+    resource: 'attribute-types',
+    optionLabel: 'name',
     meta: {
       requestType: GetManyRequestType.GetAll,
     },
@@ -21,8 +17,8 @@ export const AttributeOptionCreate = () => {
     <Create saveButtonProps={saveButtonProps}>
       <Form {...formProps} layout="vertical">
         <Form.Item
-          label={"Name"}
-          name={["optionName"]}
+          label={'Name'}
+          name={['optionName']}
           rules={[
             {
               required: true,
@@ -32,8 +28,8 @@ export const AttributeOptionCreate = () => {
           <Input />
         </Form.Item>
         <Form.Item
-          label={"Slug"}
-          name={["slug"]}
+          label={'Slug'}
+          name={['slug']}
           rules={[
             {
               required: true,
@@ -43,8 +39,8 @@ export const AttributeOptionCreate = () => {
           <Input />
         </Form.Item>
         <Form.Item
-          label={"Attribute Type"}
-          name={"attributeTypeId"}
+          label={'Attribute Type'}
+          name={'attributeTypeId'}
           rules={[
             {
               required: true,

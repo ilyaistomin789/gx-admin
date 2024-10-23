@@ -1,13 +1,13 @@
-import { DateField, List, useTable } from "@refinedev/antd";
-import { useMany, type BaseRecord } from "@refinedev/core";
-import { Space, Spin, Table } from "antd";
 import {
-  EditButton,
-  ShowButton,
   DeleteButton,
-  PlacementWorkingTime,
+  EditButton,
   Placement,
-} from "../../../core";
+  PlacementWorkingTime,
+  ShowButton,
+} from '@core';
+import { DateField, List, useTable } from '@refinedev/antd';
+import { useMany, type BaseRecord } from '@refinedev/core';
+import { Space, Spin, Table } from 'antd';
 
 export const PlacementWorkingTimeList = () => {
   const { tableProps } = useTable<PlacementWorkingTime>({
@@ -16,7 +16,7 @@ export const PlacementWorkingTimeList = () => {
 
   const { data: placementData, isLoading: placementIsLoading } =
     useMany<Placement>({
-      resource: "placements",
+      resource: 'placements',
       ids:
         tableProps?.dataSource
           ?.map((item) => item?.placementId)
@@ -29,14 +29,14 @@ export const PlacementWorkingTimeList = () => {
   return (
     <List>
       <Table {...tableProps} rowKey="id">
-        <Table.Column dataIndex="id" title={"ID"} />
-        <Table.Column dataIndex="day" title={"Day"} />
-        <Table.Column dataIndex="workingTimeFrom" title={"Working Time From"} />
-        <Table.Column dataIndex="workingTimeTill" title={"Working Time Till"} />
-        <Table.Column dataIndex="dayType" title={"Day Type"} />
+        <Table.Column dataIndex="id" title={'ID'} />
+        <Table.Column dataIndex="day" title={'Day'} />
+        <Table.Column dataIndex="workingTimeFrom" title={'Working Time From'} />
+        <Table.Column dataIndex="workingTimeTill" title={'Working Time Till'} />
+        <Table.Column dataIndex="dayType" title={'Day Type'} />
         <Table.Column
-          dataIndex={"placementId"}
-          title={"Placement"}
+          dataIndex={'placementId'}
+          title={'Placement'}
           render={(value) =>
             placementIsLoading ? (
               <Spin size="small" />
@@ -46,12 +46,12 @@ export const PlacementWorkingTimeList = () => {
           }
         />
         <Table.Column
-          dataIndex={["createdAt"]}
-          title={"Created at"}
+          dataIndex={['createdAt']}
+          title={'Created at'}
           render={(value: any) => <DateField value={value} />}
         />
         <Table.Column
-          title={"Actions"}
+          title={'Actions'}
           dataIndex="actions"
           render={(_, record: BaseRecord) => (
             <Space>

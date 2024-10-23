@@ -7,7 +7,7 @@ import {
   ProductCategory,
   ShowButton,
   SizeCategory,
-} from '../../../core';
+} from '@core';
 
 export const ProductCategoryList = () => {
   const { tableProps } = useTable<ProductCategory>({
