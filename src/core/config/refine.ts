@@ -111,6 +111,17 @@ export const resources: RefineProps['resources'] = [
     },
   },
   {
+    name: 'product-items',
+    list: '/product-items',
+    create: '/product-items/create',
+    edit: '/product-items/edit/:id',
+    show: '/product-items/show/:id',
+    meta: {
+      canDelete: true,
+      parent: 'products-entity',
+    },
+  },
+  {
     name: 'product-categories',
     list: '/product-categories',
     create: '/product-categories/create',

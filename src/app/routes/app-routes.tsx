@@ -35,6 +35,10 @@ import {
   ProductCategoryShow,
   ProductCreate,
   ProductEdit,
+  ProductItemCreate,
+  ProductItemEdit,
+  ProductItemList,
+  ProductItemShow,
   ProductList,
   ProductShow,
   ProductVariationCreate,
@@ -131,6 +135,12 @@ export const AppRoutes = () => {
           <Route path="create" element={<ProductCreate />} />
           <Route path="edit/:id" element={<ProductEdit />} />
           <Route path="show/:id" element={<ProductShow />} />
+        </Route>
+        <Route path="/product-items">
+          <Route index element={<ProductItemList />} />
+          <Route path="create" element={<ProductItemCreate />} />
+          <Route path="edit/:id" element={<ProductItemEdit />} />
+          <Route path="show/:id" element={<ProductItemShow />} />
         </Route>
         <Route path="/product-categories">
           <Route index element={<ProductCategoryList />} />

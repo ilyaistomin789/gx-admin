@@ -55,7 +55,9 @@ export type UseFormProps<
   disableServerSideValidation?: boolean;
   toEditModelConverter?: (model: TData) => TVariables;
 } & AutoSaveProps<TVariables> & {
-    defaultFormValues?: TVariables | (() => Promise<TVariables> | TVariables);
+    defaultFormValues?:
+      | Partial<TVariables>
+      | (() => Promise<Partial<TVariables>> | Partial<TVariables>);
   };
 
 export type UseFormReturnType<

@@ -7,7 +7,7 @@ export interface ProductItem {
   salePrice: number;
   code: string;
   slug: string;
-  sku: string | undefined;
+  sku: string | null;
   isCustomizable: boolean;
   status: boolean;
   createdAt: Date;
