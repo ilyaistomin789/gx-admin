@@ -8,7 +8,6 @@ import {
   GetManyRequestType,
   Image,
   ImageUpload,
-  Nullable,
   Product,
   ProductItem,
   ProductVariation,
@@ -47,6 +46,7 @@ export const ProductItemCreate = () => {
       requestType: GetManyRequestType.GetAll,
     },
   });
+
   const { selectProps: productSelectProps } = useSelect<Product>({
     resource: 'products',
     optionLabel: 'name',
@@ -54,6 +54,7 @@ export const ProductItemCreate = () => {
       requestType: GetManyRequestType.GetAll,
     },
   });
+
   const { selectProps: sizeOptionProps } = useSelect<SizeOption>({
     resource: 'size-options',
     optionLabel: 'name',
@@ -72,14 +73,6 @@ export const ProductItemCreate = () => {
     };
 
     formProps.onFinish?.(modifiedValues);
-  };
-
-  const handleImageUpload = (data: Nullable<Image>) => {
-    const currentImageIds = form.getFieldValue('imageIds') || [];
-    console.log('here', currentImageIds, data?.id);
-    // form.setFieldsValue({
-    //   imageIds: [...currentImageIds, data?.id],
-    // });
   };
 
   const handleChange = (info: UploadChangeParam<UploadFile<Image>>) => {
@@ -249,12 +242,7 @@ export const ProductItemCreate = () => {
           )}
         </Form.List>
         <Form.Item label="Upload" required>
-          <ImageUpload
-            multiple
-            maxCount={6}
-            onChange={handleChange}
-            onSuccessUpload={handleImageUpload}
-          >
+          <ImageUpload multiple maxCount={6} onChange={handleChange}>
             <Button icon={<UploadOutlined />}>Click to upload</Button>
           </ImageUpload>
         </Form.Item>
