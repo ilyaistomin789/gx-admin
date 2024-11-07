@@ -1,15 +1,33 @@
-import { Create, useForm } from "@refinedev/antd";
-import { Form, Input } from "antd";
+import { Color } from '@core';
+import { Create, useForm } from '@refinedev/antd';
+import { HttpError } from '@refinedev/core';
+import { ColorPicker, Form, Input } from 'antd';
+
+type CreateColorForm = Pick<Color, 'value' | 'name'>;
 
 export const ColorCreate = () => {
-  const { formProps, saveButtonProps } = useForm({});
+  const { formProps, saveButtonProps, form } = useForm<
+    Color,
+    HttpError,
+    CreateColorForm
+  >({});
+
+  const handleFinish = (values: CreateColorForm) => {
+    const value = form.getFieldValue('value');
+    const modifiedValues: CreateColorForm = {
+      name: values.name,
+      value,
+    };
+
+    formProps.onFinish?.(modifiedValues);
+  };
 
   return (
     <Create saveButtonProps={saveButtonProps}>
-      <Form {...formProps} layout="vertical">
+      <Form {...formProps} layout="vertical" onFinish={handleFinish}>
         <Form.Item
-          label={"Name"}
-          name={["name"]}
+          label={'Name'}
+          name={['name']}
           rules={[
             {
               required: true,
@@ -19,15 +37,20 @@ export const ColorCreate = () => {
           <Input />
         </Form.Item>
         <Form.Item
-          label={"Value"}
-          name={["value"]}
+          label={'Value'}
+          name={['value']}
           rules={[
             {
               required: true,
             },
           ]}
         >
-          <Input />
+          <ColorPicker
+            showText={(color) => (
+              <span>Color ({color.toHexString().toUpperCase()})</span>
+            )}
+            onChange={(s) => form.setFieldValue('value', s.toHexString())}
+          />
         </Form.Item>
       </Form>
     </Create>

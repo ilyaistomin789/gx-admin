@@ -6,7 +6,6 @@ export interface ProductItem {
   originalPrice: number;
   salePrice: number;
   code: string;
-  slug: string;
   sku: string | null;
   isCustomizable: boolean;
   status: boolean;

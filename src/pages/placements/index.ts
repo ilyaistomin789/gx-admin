@@ -1,2 +1,2 @@
-export * from './root';
 export * from './placement-working-times';
+export * from './root';

@@ -1,54 +1,98 @@
-import { ProductItem, ProductVariation, SizeOption } from '@core';
+import { ProductItemBff } from '@data';
 import { DateField, Show, TextField } from '@refinedev/antd';
-import { useOne, useShow } from '@refinedev/core';
-import { Spin, Switch, Typography } from 'antd';
+import { useShow } from '@refinedev/core';
+import { Image as ImageUI, List, Switch, Typography } from 'antd';
+import { useMemo } from 'react';
 
 const { Title, Text } = Typography;
 
 export const ProductItemShow = () => {
-  const { queryResult } = useShow<ProductVariation>({});
+  const { queryResult } = useShow<ProductItemBff>({});
   const { data, isLoading } = queryResult;
 
   const record = data?.data;
 
-  const { data: sizeOptionData, isLoading: sizeOptionIsLoading } =
-    useOne<SizeOption>({
-      resource: 'size-options',
-      id: record?.sizeOptionId || '',
-      queryOptions: {
-        enabled: !!record,
-      },
-    });
+  const imageList = useMemo(() => {
+    if (!record?.images) return null;
 
-  const { data: productItemData, isLoading: productItemIsLoading } =
-    useOne<ProductItem>({
-      resource: 'product-items',
-      id: record?.productItemId || '',
-      queryOptions: {
-        enabled: !!record,
-      },
-    });
+    return record.images.map((i) => <ImageUI width={300} src={i.url} />);
+  }, [record?.images]);
+
+  const listDataSource = useMemo(() => {
+    if (!record?.characteristics) return [];
+
+    return record?.characteristics.map((c) => ({
+      title: c.title,
+      value: c.value,
+      id: c.id,
+    }));
+  }, [record?.characteristics]);
 
   return (
     <Show isLoading={isLoading}>
       <Title level={5}>{'ID'}</Title>
       <TextField value={record?.id} />
-      <Title level={5}>{'Size Option'}</Title>
-      <Text>
-        {sizeOptionIsLoading ? (
-          <Spin size="small" />
-        ) : (
-          sizeOptionData?.data.name
-        )}
-      </Text>
-      <Title level={5}>{'Product Item'}</Title>
-      <Text>
-        {productItemIsLoading ? (
-          <Spin size="small" />
-        ) : (
-          productItemData?.data.name
-        )}
-      </Text>
+      <Title level={5}>{'Name'}</Title>
+      <Text>{record?.name}</Text>
+      <Title level={5}>{'Code'}</Title>
+      <Text>{record?.code}</Text>
+      {record?.sku && (
+        <>
+          <Title level={5}>{'Sku'}</Title>
+          <Text>{record?.sku}</Text>
+        </>
+      )}
+      <Title level={5}>{'Original Price'}</Title>
+      <Text>{record?.price.original}</Text>
+      <Title level={5}>{'Sale Price'}</Title>
+      <Text>{record?.price.sale}</Text>
+      <Title level={5}>{'Color'}</Title>
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: 8 }}>
+        {`${record?.color.name} - ${record?.color.value}`}
+        <div
+          style={{
+            marginLeft: '5px',
+            width: '25px',
+            backgroundColor: record?.color.value,
+            height: '25px',
+            border: '1px solid transparent',
+          }}
+        ></div>
+      </div>
+      {record?.images?.length ? (
+        <div style={{ marginBottom: 8 }}>
+          <Title level={5}>{'Images'}</Title>
+          <ImageUI.PreviewGroup
+            preview={{
+              onChange: (current, prev) =>
+                console.log(`current index: ${current}, prev index: ${prev}`),
+            }}
+          >
+            {imageList}
+          </ImageUI.PreviewGroup>
+        </div>
+      ) : null}
+      {record?.characteristics?.length ? (
+        <div style={{ marginBottom: 8 }}>
+          <Title level={5}>{'Characteristics'}</Title>
+          <List
+            itemLayout="horizontal"
+            dataSource={listDataSource}
+            renderItem={(item) => (
+              <List.Item key={item.id}>
+                <List.Item.Meta title={item.title} description={item.value} />
+              </List.Item>
+            )}
+          />
+        </div>
+      ) : null}
+      <Title level={5}>{'Is Customizable'}</Title>
+      <Switch
+        defaultChecked={record?.isCustomizable}
+        disabled
+        size="small"
+        style={{ marginBottom: 8 }}
+      />
       <Title level={5}>{'Status'}</Title>
       <Switch
         defaultChecked={record?.status}
