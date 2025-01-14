@@ -87,7 +87,7 @@ export const ProductEdit = () => {
       setFileList([
         {
           uid: image?.id,
-          name: `${image?.publicId}${image?.extension}`,
+          name: `${image?.filename}`,
           status: 'done',
           url: image?.url,
         },
@@ -101,7 +101,7 @@ export const ProductEdit = () => {
       setFileList([
         {
           uid: image?.id,
-          name: `${image?.publicId}${image?.extension}`,
+          name: `${image?.filename}`,
           status: 'done',
           url: image?.url,
         },

@@ -129,7 +129,7 @@ export const ProductItemEdit = () => {
         query?.data?.data?.images?.map(
           (image): UploadFile<Image> => ({
             uid: image?.id,
-            name: `${image?.publicId}${image?.extension}`,
+            name: `${image?.filename}`,
             status: 'done',
             url: image?.url,
           }),
@@ -144,7 +144,7 @@ export const ProductItemEdit = () => {
         query?.data?.data?.images?.map(
           (image): UploadFile<Image> => ({
             uid: image?.id,
-            name: `${image?.publicId}${image?.extension}`,
+            name: `${image?.filename}`,
             status: 'done',
             url: image?.url,
           }),
